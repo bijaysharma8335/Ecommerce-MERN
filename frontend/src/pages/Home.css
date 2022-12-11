@@ -1,4 +1,4 @@
-.category_title {
+.category_tile {
     height: 250px;
     background-size: cover;
     background-position: center;
@@ -14,10 +14,10 @@
     margin-top: 30px;
 }
 
-/* .home_banner {
+.home_banner {
     background-color: grey;
     width: 100%;
-} */
+}
 
 .card {
     border: none !important;
@@ -31,7 +31,7 @@ img.card-img-top.product-preview-img {
     transform: scale(1.05);
 }
 
-.sale__banner-container img {
+.sale_banner-container img {
     max-width: 1200px;
     display: block;
     margin: 0 auto;

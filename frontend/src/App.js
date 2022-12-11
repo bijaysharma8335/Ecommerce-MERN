@@ -2,9 +2,9 @@ import Navigation from "./components/Navigation";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-function App() {
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+const App = () => {
     return (
         <div className="App">
             <BrowserRouter>
@@ -17,6 +17,6 @@ function App() {
             </BrowserRouter>
         </div>
     );
-}
+};
 
 export default App;

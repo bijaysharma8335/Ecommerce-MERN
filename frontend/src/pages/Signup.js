@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Signup.css";
-const Login = () => {
+
+const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const handleSubmit = (e) => {
@@ -11,42 +12,60 @@ const Login = () => {
     return (
         <Container>
             <Row>
-                <Col md={6} className="login_form-container">
+                <Col md={6} className="signup_form-container">
                     <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
-                        <h1 className="text-success">Login to your Account</h1>
+                        <h1 className="text-success">Create your Account</h1>
+                        <Form.Group>
+                            <Form.Label>Full Name </Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter Your name"
+                                value=""
+                                required
+                            />
+                        </Form.Group>
                         <Form.Group>
                             <Form.Label>Email Address</Form.Label>
                             <Form.Control
                                 type="email"
                                 placeholder="Enter Your email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Enter Your password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                value=""
                                 required
                             />
                         </Form.Group>
                         <Form.Group>
-                            <Button type="submit">Login</Button>
+                            <Form.Label>Email Address</Form.Label>
+                            <Form.Control
+                                type="email"
+                                placeholder="Enter Your email"
+                                required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                type="password"
+                                placeholder="Enter Your password"
+                                required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Button type="submit">Signup</Button>
                         </Form.Group>
                         <p>
-                            Don't have a account?
-                            <Link to="/signup">Create Account</Link>
+                            Already have a account?
+                            <Link to="/login">Login</Link>
                         </p>
                     </Form>
                 </Col>
-                <Col md={6} className="login_image-container"></Col>
+                <Col md={6} className="signup_image-container"></Col>
             </Row>
         </Container>
     );
 };
 
-export default Login;
+export default Signup;
