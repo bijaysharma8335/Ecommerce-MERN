@@ -24,15 +24,7 @@ const Signup = () => {
                                 required
                             />
                         </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Email Address</Form.Label>
-                            <Form.Control
-                                type="email"
-                                placeholder="Enter Your email"
-                                value=""
-                                required
-                            />
-                        </Form.Group>
+                       
                         <Form.Group>
                             <Form.Label>Email Address</Form.Label>
                             <Form.Control
