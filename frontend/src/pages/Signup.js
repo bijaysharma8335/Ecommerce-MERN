@@ -1,30 +1,40 @@
 import React, { useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useSignupMutation } from "../services/appApi";
 import "./Signup.css";
 
 const Signup = () => {
     const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
     const [password, setPassword] = useState("");
+    const [signup, { error, isLoading, isError }] = useSignupMutation();
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        signup({ name, email, password });
     };
+
     return (
         <Container>
             <Row>
                 <Col md={6} className="signup_form-container">
                     <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
                         <h1 className="text-success">Create your Account</h1>
+                        {isError && (
+                            <Alert variant="danger">{error.data}</Alert>
+                        )}
                         <Form.Group>
-                            <Form.Label>Full Name </Form.Label>
+                            <Form.Label>Full Name</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Enter Your name"
-                                value=""
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
                                 required
                             />
                         </Form.Group>
-                       
+
                         <Form.Group>
                             <Form.Label>Email Address</Form.Label>
                             <Form.Control
@@ -46,7 +56,9 @@ const Signup = () => {
                             />
                         </Form.Group>
                         <Form.Group>
-                            <Button type="submit">Signup</Button>
+                            <Button type="submit" disabled={isLoading}>
+                                Signup
+                            </Button>
                         </Form.Group>
                         <p>
                             Already have a account?

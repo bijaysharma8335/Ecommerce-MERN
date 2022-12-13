@@ -28,6 +28,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/users", userRoutes);
 
-server.listen(8001, () => {
-    console.log("server is running at port", 8000);
+server.listen(5000, () => {
+    console.log("server is running at port", 5000);
 });
