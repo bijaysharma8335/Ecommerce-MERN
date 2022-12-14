@@ -6,15 +6,19 @@ const initialState = null;
 const userSlice = createSlice({
     name: "users",
     initialState,
-    reducers: {},
+    reducers: { logout: () => initialState },
     extraReducers: (builder) => {
         builder.addMatcher(
-            appApi.useSignupMutation.matchFulfilled,
+            appApi.endpoints.signup.matchFulfilled,
+            (_, { payload }) => payload
+        );
+        builder.addMatcher(
+            appApi.endpoints.login.matchFulfilled,
             (_, { payload }) => payload
         );
     },
 });
 
-export const {} = userSlice.actions;
+export const { logout } = userSlice.actions;
 
 export default userSlice.reducer;

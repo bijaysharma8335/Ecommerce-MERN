@@ -1,24 +1,25 @@
 import React, { useState } from "react";
-import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useLoginMutation } from "../services/appApi";
-import "./Signup.css";
+import { Col, Container, Row, Form, Button, Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useCreateProductMutation } from "../services/appApi";
+import "./NewProduct.css";
 
-const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [login, { isError, isLoading, error }] = useLoginMutation();
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        login({ email, password });
-    };
-
+const NewProduct = () => {
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [price, setPrice] = useState("");
+    const [category, setCategory] = useState("");
+    const [imgToRemove, setImgToRemove] = useState(null);
+    const [images, setImages] = useState("");
+    const navigate = useNavigate();
+    const [createProduct, { isError, error, isLoading, isSuccess }] =
+        useCreateProductMutation();
     return (
         <Container>
             <Row>
-                <Col md={6} className="login_form-container">
-                    <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
-                        <h1 className="text-success">Login </h1>
+                <Col md={6} className="newproduct_form-container">
+                    <Form style={{ width: "100%" }}>
+                        <h1 className="text-success">Create a product </h1>
                         <Form.Group>
                             {isError && (
                                 <Alert variant="danger">{error.data}</Alert>
@@ -27,8 +28,6 @@ const Login = () => {
                             <Form.Control
                                 type="email"
                                 placeholder="Enter Your email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
                         </Form.Group>
@@ -37,8 +36,6 @@ const Login = () => {
                             <Form.Control
                                 type="password"
                                 placeholder="Enter Your password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
                         </Form.Group>
@@ -47,16 +44,12 @@ const Login = () => {
                                 Login
                             </Button>
                         </Form.Group>
-                        <p>
-                            Don't have a account?
-                            <Link to="/signup">Create Account</Link>
-                        </p>
                     </Form>
                 </Col>
-                <Col md={6} className="login_image-container"></Col>
+                <Col md={6} className="newproduct_image-container"></Col>
             </Row>
         </Container>
     );
 };
 
-export default Login;
+export default NewProduct;
