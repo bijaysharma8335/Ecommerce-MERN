@@ -24,7 +24,7 @@ const Signup = () => {
                         {isError && (
                             <Alert variant="danger">{error.data}</Alert>
                         )}
-                        <Form.Group>
+                        <Form.Group className="mb-3">
                             <Form.Label>Full Name</Form.Label>
                             <Form.Control
                                 type="text"
@@ -35,7 +35,7 @@ const Signup = () => {
                             />
                         </Form.Group>
 
-                        <Form.Group>
+                        <Form.Group className="mb-3">
                             <Form.Label>Email Address</Form.Label>
                             <Form.Control
                                 type="email"
@@ -45,7 +45,7 @@ const Signup = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </Form.Group>
-                        <Form.Group>
+                        <Form.Group className="mb-3">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
                                 type="password"
@@ -55,7 +55,7 @@ const Signup = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </Form.Group>
-                        <Form.Group>
+                        <Form.Group className="mb-3">
                             <Button type="submit" disabled={isLoading}>
                                 Signup
                             </Button>

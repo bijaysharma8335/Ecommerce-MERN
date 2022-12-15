@@ -28,12 +28,12 @@ const Navigation = () => {
                                 <Nav.Link>Login</Nav.Link>
                             </LinkContainer>
                         )}
-                        {user && (
+                        {!user && (
                             <NavDropdown
                                 title={`${user.email}`}
                                 id="basic-nav-dropdown"
                             >
-                                {user.isAdmin && (
+                                {/* {user.isAdmin && ( */}
                                     <>
                                         <LinkContainer to="/dashboard">
                                             <NavDropdown.Item>
@@ -46,7 +46,7 @@ const Navigation = () => {
                                             </NavDropdown.Item>
                                         </LinkContainer>
                                     </>
-                                )}
+                                {/* )} */}
                                 {!user.isAdmin && (
                                     <>
                                         <LinkContainer to="/cart">

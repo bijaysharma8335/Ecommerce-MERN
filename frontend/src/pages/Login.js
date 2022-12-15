@@ -19,7 +19,7 @@ const Login = () => {
                 <Col md={6} className="login_form-container">
                     <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
                         <h1 className="text-success">Login </h1>
-                        <Form.Group>
+                        <Form.Group className="mb-3">
                             {isError && (
                                 <Alert variant="danger">{error.data}</Alert>
                             )}

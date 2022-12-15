@@ -20,28 +20,71 @@ const NewProduct = () => {
                 <Col md={6} className="newproduct_form-container">
                     <Form style={{ width: "100%" }}>
                         <h1 className="text-success">Create a product </h1>
-                        <Form.Group>
+                        <Form.Group className="mb-3">
+                            {isSuccess && (
+                                <Alert variant="success">
+                                    Product Created successfully!
+                                </Alert>
+                            )}
                             {isError && (
                                 <Alert variant="danger">{error.data}</Alert>
                             )}
-                            <Form.Label>Email Address</Form.Label>
+                            <Form.Label>Product Name</Form.Label>
                             <Form.Control
-                                type="email"
-                                placeholder="Enter Your email"
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                placeholder="Enter Product Name"
                                 required
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Password</Form.Label>
+                            <Form.Label>Product Description</Form.Label>
                             <Form.Control
-                                type="password"
-                                placeholder="Enter Your password"
+                                as="textarea"
+                                placeholder="Product Description"
+                                vaue={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                                style={{ height: "100px" }}
                                 required
                             />
                         </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Price($)</Form.Label>
+                            <Form.Control
+                                type="number"
+                                placeholder="Price($)"
+                                vaue={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group
+                            className="mb-3"
+                            onChange={(e) => setCategory(e.target.value)}
+                        >
+                            <Form.Label>Category</Form.Label>
+                            <Form.Select>
+                                <option disabled selected>
+                                    ---------Select one--------
+                                </option>
+                                <option value="technology">Technology</option>
+                                <option value="tablets">Tablets</option>
+                                <option value="laptops">Laptops</option>
+                                <option value="phones">Phones</option>
+                            </Form.Select>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Button type="button">Upload Images</Button>
+                          <div className="images_preview-container"></div>
+                        </Form.Group>
                         <Form.Group>
-                            <Button type="submit" disabled={isLoading}>
-                                Login
+                            <Button
+                                type="submit"
+                                disabled={isLoading || isSuccess}
+                            >
+                                Create Product
                             </Button>
                         </Form.Group>
                     </Form>
