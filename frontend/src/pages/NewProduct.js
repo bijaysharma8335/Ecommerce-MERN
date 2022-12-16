@@ -10,10 +10,31 @@ const NewProduct = () => {
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("");
     const [imgToRemove, setImgToRemove] = useState(null);
-    const [images, setImages] = useState("");
+    const [images, setImages] = useState([]);
     const navigate = useNavigate();
     const [createProduct, { isError, error, isLoading, isSuccess }] =
         useCreateProductMutation();
+
+    const showWidget = () => {
+        const widget = window.cloudinary.createUploadWidget(
+            {
+                cloudName: "photos",
+                uploadPreset: "kfhbnrbt",
+            },
+            (error, result) => {
+                if (error && result.event === "success") {
+                    setImages((prev) => [
+                        ...prev,
+                        {
+                            url: result.info.url,
+                            public_id: result.info.public_id,
+                        },
+                    ]);
+                }
+            }
+        );
+        widget.open();
+    };
     return (
         <Container>
             <Row>
@@ -76,8 +97,18 @@ const NewProduct = () => {
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Button type="button">Upload Images</Button>
-                          <div className="images_preview-container"></div>
+                            <Button type="button" onClick={showWidget}>
+                                Upload Images
+                            </Button>
+                            <div className="images_preview-container">
+                                {images.map((image) => (
+                                    <div className="img-preview">
+                                        <img src={image.url} alt="" />
+
+                                        {/* add icon fro removing */}
+                                    </div>
+                                ))}
+                            </div>
                         </Form.Group>
                         <Form.Group>
                             <Button

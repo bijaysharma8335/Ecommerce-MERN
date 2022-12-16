@@ -1,0 +1,8 @@
+.images_preview-container {
+    display: grid;
+    grid-template-columns: repeat(auto0fill, minmax(min(100px, 100%))), 1fr;
+}
+.img_preview{
+    width:100px;
+    display:inline-block;
+}
