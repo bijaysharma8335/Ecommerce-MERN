@@ -79,3 +79,5 @@ UserSChema.pre("remove", function (next) {
     this.model("Order").remove({ Owner: this._id }, next);
 });
 const User = mongoose.model("User", UserSChema);
+
+module.exports = User;

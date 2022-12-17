@@ -13,15 +13,15 @@ const App = () => {
             <BrowserRouter>
                 <Navigation />
                 <Routes>
-                    <Route exact path="/" element={<Home />} />
+                    <Route index element={<Home />} />
                     {!user && (
                         <>
-                            {" "}
-                            <Route exact path="/login" element={<Login />} />
-                            <Route exact path="/signup" element={<Signup />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/signup" element={<Signup />} />
                         </>
                     )}
                     <Route path="/new-product" element={<NewProduct />} />
+                    <Route path="*" element={<Home />} />
                 </Routes>
             </BrowserRouter>
         </div>

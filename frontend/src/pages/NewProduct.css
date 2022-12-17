@@ -2,7 +2,25 @@
     display: grid;
     grid-template-columns: repeat(auto0fill, minmax(min(100px, 100%))), 1fr;
 }
-.img_preview{
-    width:100px;
-    display:inline-block;
+.img_preview {
+    width: 100px;
+    display: inline-block;
+    position: relative;
+}
+.img_preview img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.image_preview_icon,
+.remove-img-spinner {
+    position: absolute;
+    top: -15px;
+    right: -8px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.image_preview_icon:hover {
+    color: orange;
 }

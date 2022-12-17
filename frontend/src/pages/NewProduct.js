@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Col, Container, Row, Form, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { FaTimesCircle } from "react-icons/fa";
 import { useCreateProductMutation } from "../services/appApi";
 import "./NewProduct.css";
 
@@ -18,11 +19,11 @@ const NewProduct = () => {
     const showWidget = () => {
         const widget = window.cloudinary.createUploadWidget(
             {
-                cloudName: "photos",
-                uploadPreset: "kfhbnrbt",
+                cloudName: "dqblxqx8k",
+                uploadPreset: "uiypwzyc",
             },
             (error, result) => {
-                if (error && result.event === "success") {
+                if (!error && result.event === "success") {
                     setImages((prev) => [
                         ...prev,
                         {
@@ -34,6 +35,10 @@ const NewProduct = () => {
             }
         );
         widget.open();
+    };
+
+    const handleRemoveImg = (imageObj) => {
+        setImgToRemove(imageObj.public_id);
     };
     return (
         <Container>
@@ -86,7 +91,7 @@ const NewProduct = () => {
                         >
                             <Form.Label>Category</Form.Label>
                             <Form.Select>
-                                <option disabled selected>
+                                <option disabled value="">
                                     ---------Select one--------
                                 </option>
                                 <option value="technology">Technology</option>
@@ -102,9 +107,14 @@ const NewProduct = () => {
                             </Button>
                             <div className="images_preview-container">
                                 {images.map((image) => (
-                                    <div className="img-preview">
+                                    <div className="img_preview">
                                         <img src={image.url} alt="" />
-
+                                        <FaTimesCircle
+                                            className="image_preview_icon"
+                                            onClick={() =>
+                                                handleRemoveImg(image)
+                                            }
+                                        />
                                         {/* add icon fro removing */}
                                     </div>
                                 ))}

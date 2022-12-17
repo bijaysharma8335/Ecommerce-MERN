@@ -3,31 +3,30 @@ const User = require("../models/User");
 
 //signup user
 router.post("/signup", async (req, res) => {
-    // const { name, email, password } = req.body;
-    try {
-        const salt = await bcrypt.genSalt(10);
-        const hashedPass = await bcrypt.hash(req.body.password, salt);
-        const newUser = new User({
-            name: req.body.name,
-            email: req.body.email,
-            password: hashedPass,
-        });
-        const user = await newUser.save();
-
-        return res.status(200).json(user);
-    } catch (err) {
-        res.status(500).json(err);
-    }
+    const { name, email, password } = req.body;
+    console.log("name,emailpassword", req.body);
     // try {
-    //     const user = await User.create({ name, email, password });
-    //     console.log(user);
-    //     res.json(user);
-    // } catch (error) {
-    //     if (error.code === 1000)
-    //         return res.status(400).send("Email already exists");
+    //     const salt = await bcrypt.genSalt(10);
+    //     const hashedPass = await bcrypt.hash(req.body.password, salt);
+    //     const newUser = new User({
+    //         name: req.body.name,
+    //         email: req.body.email,
+    //         password: hashedPass,
+    //     });
+    //     const user = await newUser.save();
 
-    //     res.status(400).send(error.message);
+    //     return res.status(200).json(user);
+    // } catch (err) {
+    //     res.status(500).json(err);
     // }
+    try {
+        const user = await User.create({ name, email, password });
+        res.json(user);
+    } catch (e) {
+        if (e.code === 11000)
+            return res.status(400).send("Email already exists");
+        res.status(400).send(e.message);
+    }
 });
 
 //login user
