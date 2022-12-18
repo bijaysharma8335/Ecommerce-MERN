@@ -24,3 +24,9 @@
 .image_preview_icon:hover {
     color: orange;
 }
+.newproduct_image-container {
+    background-image: url("https://www.volusion.com/blog/content/images/2021/09/Product-Photography.jpeg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}

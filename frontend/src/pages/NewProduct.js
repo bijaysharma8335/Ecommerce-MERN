@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Col, Container, Row, Form, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FaTimesCircle } from "react-icons/fa";
+import axios from "axios";
 import { useCreateProductMutation } from "../services/appApi";
 import "./NewProduct.css";
 
@@ -13,6 +14,7 @@ const NewProduct = () => {
     const [imgToRemove, setImgToRemove] = useState(null);
     const [images, setImages] = useState([]);
     const navigate = useNavigate();
+
     const [createProduct, { isError, error, isLoading, isSuccess }] =
         useCreateProductMutation();
 
@@ -39,13 +41,38 @@ const NewProduct = () => {
 
     const handleRemoveImg = (imageObj) => {
         setImgToRemove(imageObj.public_id);
+        axios
+            .delete(`/images/${imageObj.public_id}/`)
+            .then((res) => {
+                setImgToRemove(null);
+                setImages((prev) =>
+                    prev.filter((img) => img.public_id !== imageObj.public_id)
+                );
+            })
+            .catch((e) => console.log(e));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!name || !description || !price || !category || !images.length) {
+            return alert("please fill out the fields");
+        }
+        createProduct({ name, description, price, category, images }).then(
+            (data) => {
+                if (data.length > 0) {
+                    setTimeout(() => {
+                        navigate("/");
+                    }, 1500);
+                }
+            }
+        );
     };
     return (
         <Container>
             <Row>
                 <Col md={6} className="newproduct_form-container">
-                    <Form style={{ width: "100%" }}>
-                        <h1 className="text-success">Create a product </h1>
+                    <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
+                        <h1 className="text-success mt-4">Create a product </h1>
                         <Form.Group className="mb-3">
                             {isSuccess && (
                                 <Alert variant="success">
@@ -109,12 +136,14 @@ const NewProduct = () => {
                                 {images.map((image) => (
                                     <div className="img_preview">
                                         <img src={image.url} alt="" />
-                                        <FaTimesCircle
-                                            className="image_preview_icon"
-                                            onClick={() =>
-                                                handleRemoveImg(image)
-                                            }
-                                        />
+                                        {imgToRemove !== image.public_id && (
+                                            <FaTimesCircle
+                                                className="image_preview_icon"
+                                                onClick={() =>
+                                                    handleRemoveImg(image)
+                                                }
+                                            />
+                                        )}
                                         {/* add icon fro removing */}
                                     </div>
                                 ))}

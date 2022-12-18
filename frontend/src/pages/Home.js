@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import categories from "../Categories";
 import "./Home.css";
+import axios from "../apiApi";
+import { useDispatch, useSelector } from "react-redux";
+import { updateProducts } from "../features/productSlice";
+import ProductPreview from "../components/ProductPreview";
+
 const Home = () => {
+    const dispatch = useDispatch();
+    const products = useSelector((state) => state.products);
+    const lastProducts = products.data;
+
+    useEffect(() => {
+        axios.get("/products").then((data) => dispatch(updateProducts(data)));
+    }, []);
+
     return (
         <div>
             <img
@@ -14,7 +27,13 @@ const Home = () => {
             />
             <div className="featured-products-container container mt-4">
                 <h3>Last Products</h3>
-                {/* last products here */}{" "}
+                {/* last products here */}
+                <div className="d-flex justify-content-center flex-wrap">
+                    {lastProducts.map((product, i) => (
+                        <ProductPreview {...product} key={i} />
+                    ))}
+                </div>
+
                 <div>
                     <Link
                         to="/category/all"
@@ -41,6 +60,7 @@ const Home = () => {
                     {categories.map((category, i) => (
                         <LinkContainer
                             to={`/category/${category.name.toLocaleLowerCase()}`}
+                            key={i}
                         >
                             <Col md={4}>
                                 <div
