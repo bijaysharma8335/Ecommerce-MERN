@@ -81,14 +81,29 @@ router.get("/:id", async (req, res) => {
     const { id } = req.params;
 
     try {
-        const products = await Product.findById(id);
+        const product = await Product.findById(id);
         const similar = await Product.find({
             category: product.category,
         }).limit(5);
-        res.status(200).json(products, similar);
+        res.status(200).json({ product, similar });
     } catch (e) {
         res.status(400).json(e.message);
     }
 });
 
+//categories
+router.get("/category/:category", async (req, res) => {
+    const { category } = req.params;
+    try {
+        let products;
+        if (category == "all") {
+            products = await Product.find().sort({ date: -1 });
+        } else {
+            products = await Product.find({ category });
+        }
+        res.status(200).json(products);
+    } catch (e) {
+        res.status(400).json(e.message);
+    }
+});
 module.exports = router;

@@ -29,9 +29,10 @@ const Home = () => {
                 <h3>Last Products</h3>
                 {/* last products here */}
                 <div className="d-flex justify-content-center flex-wrap">
-                    {lastProducts.map((product, i) => (
-                        <ProductPreview {...product} key={i} />
-                    ))}
+                    {lastProducts.length > 0 &&
+                        lastProducts.map((product, i) => (
+                            <ProductPreview {...product} key={i} />
+                        ))}
                 </div>
 
                 <div>
