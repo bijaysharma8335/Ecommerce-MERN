@@ -106,4 +106,76 @@ router.get("/category/:category", async (req, res) => {
         res.status(400).json(e.message);
     }
 });
+
+//cart routes
+router.post("/add-to-cart", async (req, res) => {
+    const { userId, productId, price } = req.body;
+    try {
+        const user = await User.findById(userId);
+        const userCart = user.cart;
+        if (user.cart[productId]) {
+            userCart[productId] += 1;
+        } else {
+            userCart[productId] = 1;
+        }
+        userCart.count += 1;
+        userCart.total = Number(userCart.total) = Number(price);
+
+        user.cart = userCart;
+        user.markModified('cart');
+        await user.save();
+        res.status(200).json(user)
+    } catch (error) { res.status(400).json(error.message)}
+});
+
+
+//increase cart product
+router.post("/increase-cart", async (req, res) => {
+    const { userId, productId, price } = req.body;
+    try {
+        const user = await User.findById(userId);
+        const userCart = user.cart;
+        userCart.total+=Number(price);
+        userCart.count +=1;
+        userCart[productId]+=1;
+        user.cart=userCart;
+        user.markModified('cart');
+        await user.save();
+        res.status(200).json(user)
+    } catch (error) { res.status(400).json(error.message)}
+});
+//decrease cart product
+router.post("/decrease-cart", async (req, res) => {
+    const { userId, productId, price } = req.body;
+    try {
+        const user = await User.findById(userId);
+        const userCart = user.cart;
+        userCart.total -= Number(price);
+        userCart.count -= 1;
+        userCart[productId] -= 1;
+        user.cart = userCart;
+        user.markModified('cart');
+        await user.save();
+        res.status(200).json(user)
+    } catch (error) { res.status(400).json(error.message)}
+});
+
+router.post('/remove-from-cart',async(req,res)=>{
+    const{userId,productId,price} = req.body;
+    try {
+        const user = await  User.findById(userId);
+        const userCart = user.cart;
+        userCart.total-=Number(userCart[productId])* Number(price);
+        userCart.count -=userCart[productId];
+        delete userCart[productId]
+        user.cart=userCart;
+        user.markModified('cart');
+        await user.save();
+
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(400).json(error.message)
+        
+    }
+})
 module.exports = router;

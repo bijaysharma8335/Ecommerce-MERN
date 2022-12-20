@@ -1,12 +1,20 @@
 import React, { useState } from "react";
-import { Container, Nav, Navbar, NavDropdown, Button } from "react-bootstrap";
+import {
+    Container,
+    Nav,
+    Navbar,
+    NavDropdown,
+    Button,
+    Badge,
+} from "react-bootstrap";
+import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { logout } from "../features/userSlice";
-import './Navigation.css'
+import "./Navigation.css";
 const Navigation = () => {
     const user = useSelector((state) => state.user);
-   
+
     const dispatch = useDispatch();
     const handleLogout = () => {
         dispatch(logout());
@@ -26,6 +34,21 @@ const Navigation = () => {
                         {!user && (
                             <LinkContainer to="/login">
                                 <Nav.Link>Login</Nav.Link>
+                            </LinkContainer>
+                        )}
+                        {user && !user.isAdmin && (
+                            <LinkContainer to="/cart">
+                                <Nav.Link>
+                                    <FaShoppingCart />
+                                    {user?.cart.count > 0 && (
+                                        <span
+                                            className="badge badge-warning"
+                                            id="cartcount"
+                                        >
+                                            {user.cart.count}
+                                        </span>
+                                    )}
+                                </Nav.Link>
                             </LinkContainer>
                         )}
                         {user && (

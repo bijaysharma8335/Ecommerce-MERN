@@ -18,6 +18,7 @@ import axios from "../apiApi";
 import Loading from "../components/Loading";
 import SimilarProduct from "../components/SimilarProduct";
 import "./ProductPage.css";
+import { useAddToCartMutation } from "../services/appApi";
 
 const ProductPage = () => {
     const { id } = useParams();
@@ -26,6 +27,8 @@ const ProductPage = () => {
     const [product, setProduct] = useState(null);
     const [similar, setSimilar] = useState(null);
     let similarProducts = [];
+    const [addToCart, { isSuccess }] = useAddToCartMutation();
+
     const handleDragStart = (e) => {
         e.preventDefault();
     };
@@ -93,7 +96,18 @@ const ProductPage = () => {
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                             </Form.Select>
-                            <Button size="lg" disabled={!user}>
+                            <Button
+                                size="lg"
+                                disabled={!user}
+                                onClick={() =>
+                                    addToCart({
+                                        userId: user._id,
+                                        productId: id,
+                                        price: product.price,
+                                        image: product.pictures[0].url,
+                                    })
+                                }
+                            >
                                 Add to Cart
                             </Button>
                         </ButtonGroup>
