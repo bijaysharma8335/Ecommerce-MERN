@@ -3,12 +3,19 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Alert, Col, Container, Row, Table } from "react-bootstrap";
 import { FaMinusCircle, FaPlusCircle, FaTimes } from "react-icons/fa";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import "./CartPage.css";
 import {
     useIncreaseCartProductMutation,
     useDecreaseCartProductMutation,
     useRemoveFromCartMutation,
 } from "../services/appApi";
+import CheckoutForm from "../components/CheckoutForm";
+
+const stripePromise = loadStripe(
+    "pk_test_51Ld5jYSIyhZkpeatyL0wvVR4aHTOy8U6GauGjkRHPY1sX5c023YUiN5KKwFjSm8Zwskh7XjwOeMutJwpQO1XbWZa00o8jd4Urt"
+);
 const CartPage = () => {
     const user = useSelector((state) => state.user);
     const products = useSelector((state) => state.products.data);
@@ -31,14 +38,15 @@ const CartPage = () => {
         <Container style={{ minHeight: "95vh" }}>
             <Row>
                 <Col md={7}>
-                    <h1 className="pt-2 ">Shopping Cart</h1>
+                    <h1 className="pt-2 h3">Shopping Cart</h1>
                     {cart.length === 0 ? (
                         <Alert variant="info">
-                            Shopping Cart is empty.Please add products to your
-                            cart
+                            Shopping Cart is empty. Add products to your cart
                         </Alert>
                     ) : (
-                        <div>Click Here</div>
+                        <Elements stripe={stripePromise}>
+                            <CheckoutForm />
+                        </Elements>
                     )}
                 </Col>{" "}
                 {cart.length > 0 && (
@@ -55,7 +63,7 @@ const CartPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {cart.map((item, i) => (
+                                    {cart.map((item) => (
                                         <tr>
                                             <td>&nbsp;</td>
                                             <td>
@@ -63,7 +71,7 @@ const CartPage = () => {
                                                     <FaTimes
                                                         style={{
                                                             marginRight: "10",
-                                                            marginLeft: "10",
+                                                            
                                                             cursor: "pointer",
                                                         }}
                                                         onClick={() =>
