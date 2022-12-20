@@ -39,7 +39,9 @@ const Navigation = () => {
                         {user && !user.isAdmin && (
                             <LinkContainer to="/cart">
                                 <Nav.Link>
-                                    <FaShoppingCart />
+                                    <FaShoppingCart
+                                        style={{ fontSize: "20px" }}
+                                    />
                                     {user?.cart.count > 0 && (
                                         <span
                                             className="badge badge-warning"
