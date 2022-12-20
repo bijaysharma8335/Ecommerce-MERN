@@ -81,7 +81,7 @@ const ProductPage = () => {
                         <Badge bg="primary">{product.category}</Badge>
                     </p>
                     <p className="product_price">${product.price}</p>
-                    <p className="py-3" style={{ textAlign: "justify" }}>
+                    <p className="py-3" style={{ textAlign: "center" }}>
                         {product.description}
                     </p>
 

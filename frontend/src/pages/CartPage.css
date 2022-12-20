@@ -1,2 +1,10 @@
 .cart_container {
 }
+.icon {
+    cursor: pointer;
+    display: inline-block;
+}
+.table-responsive-sm {
+    max-height: 70vh;
+    overflow: scroll;
+}

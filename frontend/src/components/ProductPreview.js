@@ -5,7 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 const ProductPreview = ({ _id, category, name, pictures }) => {
     return (
         <LinkContainer
-            to={`/products/${_id}`}
+            to={`/product/${_id}`}
             style={{
                 Cursor: "pointer",
                 width: "13rem",

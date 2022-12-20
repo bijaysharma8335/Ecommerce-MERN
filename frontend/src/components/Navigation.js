@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     Container,
     Nav,
     Navbar,
     NavDropdown,
     Button,
-    Badge,
 } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
