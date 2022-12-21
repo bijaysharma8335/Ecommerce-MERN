@@ -1,11 +1,5 @@
 import React from "react";
-import {
-    Container,
-    Nav,
-    Navbar,
-    NavDropdown,
-    Button,
-} from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown, Button } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
@@ -57,9 +51,9 @@ const Navigation = () => {
                                 title={`${user.name}`}
                                 id="basic-nav-dropdown"
                             >
-                                {!user.isAdmin && (
+                                {user.isAdmin && (
                                     <>
-                                        <LinkContainer to="/dashboard">
+                                        <LinkContainer to="/admin">
                                             <NavDropdown.Item>
                                                 Dashboard
                                             </NavDropdown.Item>
@@ -71,7 +65,7 @@ const Navigation = () => {
                                         </LinkContainer>
                                     </>
                                 )}
-                                {user.isAdmin && (
+                                {!user.isAdmin && (
                                     <>
                                         <LinkContainer to="/cart">
                                             <NavDropdown.Item>
@@ -80,7 +74,7 @@ const Navigation = () => {
                                         </LinkContainer>
                                         <LinkContainer to="/orders">
                                             <NavDropdown.Item>
-                                                Orders
+                                                My Orders
                                             </NavDropdown.Item>
                                         </LinkContainer>
                                     </>

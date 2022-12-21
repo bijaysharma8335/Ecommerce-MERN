@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Form, Button, Alert } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaTimesCircle } from "react-icons/fa";
 import axios from "axios";
-import { useCreateProductMutation } from "../services/appApi";
+import { useUpdateProductMutation } from "../services/appApi";
 import "./NewProduct.css";
 
-const NewProduct = () => {
+const EditProductPage = () => {
+    const id = useParams();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
@@ -15,8 +16,24 @@ const NewProduct = () => {
     const [images, setImages] = useState([]);
     const navigate = useNavigate();
 
-    const [createProduct, { isError, error, isLoading, isSuccess }] =
-        useCreateProductMutation();
+    const [updateProduct, { isError, error, isLoading, isSuccess }] =
+        useUpdateProductMutation();
+
+    useEffect(() => {
+        axios
+            .get("/products" + id)
+            .then((data) => {
+                const product = data.product;
+                setName(product.name);
+                setDescription(product.description);
+                setCategory(product.category);
+                setImages(product.pictures);
+                setPrice(product.price);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }, [id]);
 
     const showWidget = () => {
         const widget = window.cloudinary.createUploadWidget(
@@ -57,7 +74,7 @@ const NewProduct = () => {
         if (!name || !description || !price || !category || !images.length) {
             return alert("please fill out the fields");
         }
-        createProduct({ name, description, price, category, images }).then(
+        updateProduct({ id, name, description, price, category, images }).then(
             (data) => {
                 if (data.length > 0) {
                     setTimeout(() => {
@@ -72,12 +89,10 @@ const NewProduct = () => {
             <Row>
                 <Col md={6} className="newproduct_form-container">
                     <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
-                        <h1 className="text-success mt-4">Create a product </h1>
+                        <h1 className="text-success mt-4">Edit product </h1>
                         <Form.Group className="mb-3">
                             {isSuccess && (
-                                <Alert variant="success">
-                                    Product Created successfully!
-                                </Alert>
+                                <Alert variant="success">Product updated</Alert>
                             )}
                             {isError && (
                                 <Alert variant="danger">{error.data}</Alert>
@@ -117,7 +132,7 @@ const NewProduct = () => {
                             onChange={(e) => setCategory(e.target.value)}
                         >
                             <Form.Label>Category</Form.Label>
-                            <Form.Select>
+                            <Form.Select value={category}>
                                 <option disabled value="">
                                     ---------Select one--------
                                 </option>
@@ -154,7 +169,7 @@ const NewProduct = () => {
                                 type="submit"
                                 disabled={isLoading || isSuccess}
                             >
-                                Create Product
+                                Update Product
                             </Button>
                         </Form.Group>
                     </Form>
@@ -165,4 +180,4 @@ const NewProduct = () => {
     );
 };
 
-export default NewProduct;
+export default EditProductPage;
