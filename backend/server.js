@@ -22,6 +22,7 @@ const User = require("./models/User");
 const userRoutes = require("./routes/userRoute");
 const productRoutes = require("./routes/productRoute");
 const imageRoute = require("./routes/imagesRoute");
+const orderRoute = require("./routes/orderRoute");
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -29,9 +30,11 @@ app.use(express.json());
 app.use("/users", userRoutes);
 app.use("/products", productRoutes);
 app.use("/images", imageRoute);
+app.use("/orders", orderRoute);
 
 app.post("/create-payment", async (req, res) => {
-    const amount = req.body;
+    const amount = req.body.amount;
+
     try {
         const paymentIntent = await stripe.paymentIntents.create({
             amount,

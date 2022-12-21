@@ -1,24 +1,11 @@
 const router = require("express").Router();
 const User = require("../models/User");
+const Order = require("../models/Order");
 
 //signup user
 router.post("/signup", async (req, res) => {
     const { name, email, password } = req.body;
-    console.log("name,emailpassword", req.body);
-    // try {
-    //     const salt = await bcrypt.genSalt(10);
-    //     const hashedPass = await bcrypt.hash(req.body.password, salt);
-    //     const newUser = new User({
-    //         name: req.body.name,
-    //         email: req.body.email,
-    //         password: hashedPass,
-    //     });
-    //     const user = await newUser.save();
 
-    //     return res.status(200).json(user);
-    // } catch (err) {
-    //     res.status(500).json(err);
-    // }
     try {
         const user = await User.create({ name, email, password });
         res.json(user);
@@ -51,4 +38,14 @@ router.get("/", async (req, res) => {
     }
 });
 
+//get user orders
+router.get("/:id/orders", async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findById(id).populate("orders");
+        res.status(200).json(user.orders);
+    } catch (error) {
+        res.status(400).json(error.message);
+    }
+});
 module.exports = router;

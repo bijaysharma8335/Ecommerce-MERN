@@ -63,15 +63,15 @@ const CartPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {cart.map((item) => (
-                                        <tr>
+                                    {cart.map((item, i) => (
+                                        <tr key={i}>
                                             <td>&nbsp;</td>
                                             <td>
                                                 {!isLoading && (
                                                     <FaTimes
                                                         style={{
                                                             marginRight: "10",
-                                                            
+
                                                             cursor: "pointer",
                                                         }}
                                                         onClick={() =>
