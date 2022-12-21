@@ -31,7 +31,7 @@ router.post("/login", async (req, res) => {
 //get users
 router.get("/", async (req, res) => {
     try {
-        const users = User.find({ isAdmin: false }).populate("orders");
+        const users = await User.find({ isAdmin: false }).populate("orders");
         res.json(users);
     } catch (error) {
         res.status(400).send(error.message);

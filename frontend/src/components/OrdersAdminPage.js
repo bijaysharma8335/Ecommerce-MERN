@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Badge, Button, Modal, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import FaEye from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import axios from "../apiApi";
 import Loading from "./Loading";
 
@@ -99,7 +99,7 @@ const OrdersAdminPage = () => {
                                     <span style={{ cursor: "pointer" }}>
                                         View Order
                                         <FaEye
-                                            onClick={() => showOrder(products)}
+                                            onClick={() => showOrder(order.products)}
                                         />
                                     </span>
                                 </td>
@@ -108,7 +108,37 @@ const OrdersAdminPage = () => {
                 </tbody>
             </Table>
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton></Modal.Header>
+                <Modal.Header closeButton>Order Details</Modal.Header>
+                <Modal.Body>
+                    {orderToShow.length > 0 &&
+                        orderToShow.map((order, i) => (
+                            <div className="order_details-container d-flex justify-conten-around py-2" key={i}>
+                                <img
+                                    src={order.pictures[0].url}
+                                    style={{
+                                        maxWidth: 100,
+                                        height: 100,
+                                        objectFit: "cover",
+                                    }}
+                                    alt=""
+                                />
+                                <p>
+                                    <span>
+                                        {order.count} x{" "}
+                                        <span>{order.name}</span>
+                                    </span>
+                                </p>
+                                <p>
+                                    Price: ${Number(order.price) * order.count}
+                                </p>
+                            </div>
+                        ))}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
             </Modal>
         </>
     );

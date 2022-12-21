@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
+import ClientsAdminPage from "../components/ClientsAdminPage";
 import DashboardProduct from "../components/DashboardProduct";
 import OrdersAdminPage from "../components/OrdersAdminPage";
 
@@ -30,6 +31,9 @@ const AdminDashboard = () => {
                             </Tab.Pane>
                             <Tab.Pane eventKey="orders">
                                 <OrdersAdminPage />
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="clients">
+                                <ClientsAdminPage />
                             </Tab.Pane>
                         </Tab.Content>
                     </Col>

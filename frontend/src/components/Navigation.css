@@ -20,3 +20,39 @@
     padding-right: 9px;
     border-radius: 9px;
 }
+.notifications_container {
+    position: absolute;
+
+    max-height: 200px;
+    overflow-y: scroll;
+    border: 1px solid gray;
+    background-color: white;
+    width: 200px;
+    z-index: 999;
+}
+.notifications-read {
+    background-color: lightblue;
+}
+.notifications-unread {
+    background-color: lightcoral;
+}
+.fa-bell {
+    font-size: 1.5em;
+}
+.fas[data-count] {
+    position: relative;
+}
+.fas[data-count]:after {
+    position: absolute;
+    right: -0.75em;
+    top: -0.75em;
+    content: attr(data-count);
+    padding: 0.5em;
+    border-radius: 10em;
+    line-height: 0.9em;
+    color: white;
+    background-color: red;
+    text-align: center;
+    font: bold 0.5em sans-serif;
+    min-width: 2em;
+}
