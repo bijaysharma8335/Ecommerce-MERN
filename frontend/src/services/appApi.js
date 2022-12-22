@@ -35,8 +35,8 @@ export const appApi = createApi({
         deleteProduct: builder.mutation({
             query: ({ product_id, user_id }) => ({
                 url: `/products/${product_id}`,
-                body: { user_id },
                 method: "DELETE",
+                body: { user_id },
             }),
         }),
 

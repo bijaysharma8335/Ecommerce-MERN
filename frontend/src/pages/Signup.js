@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSignupMutation } from "../services/appApi";
 import "./Signup.css";
 
 const Signup = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
@@ -12,7 +13,11 @@ const Signup = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        signup({ name, email, password });
+        signup({ name, email, password })
+            .then((res) => {
+                navigate("/login");
+            })
+            .catch((e) => console.log(e));
     };
 
     return (

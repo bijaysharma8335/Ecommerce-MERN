@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../services/appApi";
 import "./Signup.css";
 
 const Login = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [login, { isError, isLoading, error }] = useLoginMutation();
     const handleSubmit = (e) => {
         e.preventDefault();
-        login({ email, password });
+        login({ email, password })
+            .then((res) => {
+                navigate("/");
+            })
+            .catch((e) => console.log(e));
     };
 
     return (

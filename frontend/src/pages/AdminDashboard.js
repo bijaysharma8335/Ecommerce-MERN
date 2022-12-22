@@ -9,7 +9,7 @@ const AdminDashboard = () => {
         <Container>
             <Tab.Container defaultActiveKey="products">
                 <Row>
-                    <Col sm={3}>
+                    <Col sm={3} className="my-2">
                         <Nav variant="pills" className="flex-columns">
                             <Nav.Item>
                                 <Nav.Link eventKey="products">

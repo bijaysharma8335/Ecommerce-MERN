@@ -19,7 +19,7 @@ const OrdersPage = () => {
             .get(`users/${user._id}/orders`)
             .then((res) => {
                 setLoading(false);
-                setOrders(res);
+                setOrders(res.data);
             })
             .catch((e) => {
                 setLoading(false);

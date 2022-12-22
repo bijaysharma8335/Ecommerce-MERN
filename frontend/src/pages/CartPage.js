@@ -48,7 +48,7 @@ const CartPage = () => {
                             <CheckoutForm />
                         </Elements>
                     )}
-                </Col>{" "}
+                </Col>
                 {cart.length > 0 && (
                     <Col md={5}>
                         <>

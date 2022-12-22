@@ -10,7 +10,6 @@ import { useLocation } from "react-router-dom";
 const EditProductPage = () => {
     const { id } = useParams();
     const location = useLocation();
-
     const [name, setName] = useState(location.state.name);
     const [description, setDescription] = useState(location.state.description);
     const [price, setPrice] = useState(location.state.price);
@@ -65,7 +64,9 @@ const EditProductPage = () => {
             .delete(`/images/${imgObj.public_id}`)
             .then((res) => {
                 setImgToRemove(null);
-                setImages((prev) => prev.filter((img) => img.public_id !== imgObj.public_id));
+                setImages((prev) =>
+                    prev.filter((img) => img.public_id !== imgObj.public_id)
+                );
             })
             .catch((e) => console.log(e));
     };

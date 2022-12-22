@@ -17,7 +17,7 @@ const DashboardProduct = () => {
             deleteProduct({ product_id: id, user_id: user.id });
     };
 
-    function TableRow({ pictures, _id, name, price }) {
+    function TableRow({ pictures, _id, name, price, category }) {
         return (
             <tr>
                 <td>
@@ -29,9 +29,19 @@ const DashboardProduct = () => {
                 </td>
                 <td>{_id}</td>
                 <td>{name}</td>
+                <td>{category}</td>
+
                 <td>{price}</td>
-                <td> <Link
+                <td>
+                    {" "}
+                    <Link
                         to={`/product/${_id}/edit`}
+                        state={{
+                            name: name,
+                            pictures: pictures,
+                            id: _id,
+                            price: price,
+                        }}
                         className="btn btn-primary me-2"
                     >
                         Edit
@@ -43,7 +53,6 @@ const DashboardProduct = () => {
                     >
                         Delete
                     </Button>
-                   
                 </td>
             </tr>
         );
@@ -55,6 +64,7 @@ const DashboardProduct = () => {
                     <th></th>
                     <th>Product ID</th>
                     <th>Product Name</th>
+                    <th>Product Category</th>
                     <th>Product Price</th>
                 </tr>
             </thead>
