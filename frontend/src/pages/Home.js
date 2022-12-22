@@ -4,20 +4,18 @@ import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import categories from "../Categories";
 import "./Home.css";
-import axios from "../apiApi";
+import axios from "../apiApi.js";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProducts } from "../features/productSlice";
 import ProductPreview from "../components/ProductPreview";
 
 const Home = () => {
     const dispatch = useDispatch();
-    const products = useSelector((state) => state.products);
+    const products = useSelector((state) => state.products.data);
     const lastProducts = products;
-    console.log(products.length);
+
     useEffect(() => {
-        axios
-            .get("/products")
-            .then((res) => dispatch(updateProducts(res)));
+        axios.get("/products").then((res) => dispatch(updateProducts(res)));
     }, []);
 
     return (
@@ -31,7 +29,7 @@ const Home = () => {
                 <h3>Last Products</h3>
                 {/* last products here */}
                 <div className="d-flex justify-content-center flex-wrap">
-                    {lastProducts.length > 0 &&
+                    {lastProducts?.length > 0 &&
                         lastProducts.map((product, i) => (
                             <ProductPreview {...product} key={i} />
                         ))}

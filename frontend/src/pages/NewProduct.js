@@ -18,7 +18,8 @@ const NewProduct = () => {
     const [createProduct, { isError, error, isLoading, isSuccess }] =
         useCreateProductMutation();
 
-    const showWidget = () => {
+    const showWidget = (e) => {
+        e.preventDefault();
         const widget = window.cloudinary.createUploadWidget(
             {
                 cloudName: "dqblxqx8k",

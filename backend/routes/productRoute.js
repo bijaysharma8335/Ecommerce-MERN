@@ -37,8 +37,9 @@ router.post("/", async (req, res) => {
 });
 
 //update product
+
 router.patch("/:id", async (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     try {
         const {
             name,
@@ -54,13 +55,12 @@ router.patch("/:id", async (req, res) => {
             category,
             pictures,
         });
-        const products = Product.find();
+        const products = await Product.find();
         res.status(200).json(products);
     } catch (e) {
-        res.status(400).json(e.message);
+        res.status(400).send(e.message);
     }
 });
-
 //delete product
 router.delete("/:id", async (req, res) => {
     const { id } = req.params;

@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Form, Button, Alert } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaTimesCircle } from "react-icons/fa";
-import axios from "axios";
+import axios from "../apiApi.js";
 import { useUpdateProductMutation } from "../services/appApi";
 import "./NewProduct.css";
+import { useLocation } from "react-router-dom";
 
 const EditProductPage = () => {
     const { id } = useParams();
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
-    const [category, setCategory] = useState("");
+    const location = useLocation();
+
+    const [name, setName] = useState(location.state.name);
+    const [description, setDescription] = useState(location.state.description);
+    const [price, setPrice] = useState(location.state.price);
+    const [category, setCategory] = useState(location.state.category);
     const [imgToRemove, setImgToRemove] = useState(null);
     const [images, setImages] = useState([]);
     const navigate = useNavigate();
@@ -23,7 +26,6 @@ const EditProductPage = () => {
         axios
             .get("/products/" + id)
             .then((res) => {
-                console.log(res.data);
                 const product = res.data.product;
                 setName(product.name);
                 setDescription(product.description);
@@ -57,22 +59,26 @@ const EditProductPage = () => {
         widget.open();
     };
 
-    const handleRemoveImg = (imageObj) => {
-        setImgToRemove(imageObj.public_id);
+    const handleRemoveImg = (imgObj) => {
+        setImgToRemove(imgObj.public_id);
         axios
-            .delete(`/images/${imageObj.public_id}/`)
+            .delete(`/images/${imgObj.public_id}`)
             .then((res) => {
                 setImgToRemove(null);
-                setImages((prev) =>
-                    prev.filter((img) => img.public_id !== imageObj.public_id)
-                );
+                setImages((prev) => prev.filter((img) => img.public_id !== imgObj.public_id));
             })
             .catch((e) => console.log(e));
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!name || !description || !price || !category || !images.length) {
+        if (
+            !name ||
+            !description ||
+            !price ||
+            !category ||
+            images.length === 0
+        ) {
             return alert("please fill out the fields");
         }
         updateProduct({ id, name, description, price, category, images }).then(

@@ -115,7 +115,10 @@ const ProductPage = () => {
                     )}
 
                     {user && user.isAdmin && (
-                        <LinkContainer to={`/product/${product._id}/edit`}>
+                        <LinkContainer
+                            to={`/product/${product._id}/edit`}
+                            state={product}
+                        >
                             <Button size="lg">Edit Product</Button>
                         </LinkContainer>
                     )}
