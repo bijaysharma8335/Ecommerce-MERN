@@ -7,7 +7,7 @@ import { useUpdateProductMutation } from "../services/appApi";
 import "./NewProduct.css";
 
 const EditProductPage = () => {
-    const id = useParams();
+    const { id } = useParams();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
@@ -21,9 +21,10 @@ const EditProductPage = () => {
 
     useEffect(() => {
         axios
-            .get("/products" + id)
-            .then((data) => {
-                const product = data.product;
+            .get("/products/" + id)
+            .then((res) => {
+                console.log(res.data);
+                const product = res.data.product;
                 setName(product.name);
                 setDescription(product.description);
                 setCategory(product.category);
@@ -75,7 +76,7 @@ const EditProductPage = () => {
             return alert("please fill out the fields");
         }
         updateProduct({ id, name, description, price, category, images }).then(
-            (data) => {
+            ({ data }) => {
                 if (data.length > 0) {
                     setTimeout(() => {
                         navigate("/");
@@ -89,21 +90,21 @@ const EditProductPage = () => {
             <Row>
                 <Col md={6} className="newproduct_form-container">
                     <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
-                        <h1 className="text-success mt-4">Edit product </h1>
+                        <h1 className=" mt-4">Edit product </h1>{" "}
+                        {isSuccess && (
+                            <Alert variant="success">Product updated</Alert>
+                        )}
+                        {isError && (
+                            <Alert variant="danger">{error.data}</Alert>
+                        )}
                         <Form.Group className="mb-3">
-                            {isSuccess && (
-                                <Alert variant="success">Product updated</Alert>
-                            )}
-                            {isError && (
-                                <Alert variant="danger">{error.data}</Alert>
-                            )}
                             <Form.Label>Product Name</Form.Label>
                             <Form.Control
                                 type="text"
                                 value={name}
+                                required
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder="Enter Product Name"
-                                required
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
@@ -111,10 +112,10 @@ const EditProductPage = () => {
                             <Form.Control
                                 as="textarea"
                                 placeholder="Product Description"
-                                vaue={description}
+                                value={description}
+                                required
                                 onChange={(e) => setDescription(e.target.value)}
                                 style={{ height: "100px" }}
-                                required
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
@@ -122,9 +123,9 @@ const EditProductPage = () => {
                             <Form.Control
                                 type="number"
                                 placeholder="Price($)"
-                                vaue={price}
-                                onChange={(e) => setPrice(e.target.value)}
                                 required
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
                             />
                         </Form.Group>
                         <Form.Group
@@ -142,7 +143,6 @@ const EditProductPage = () => {
                                 <option value="phones">Phones</option>
                             </Form.Select>
                         </Form.Group>
-
                         <Form.Group className="mb-3">
                             <Button type="button" onClick={showWidget}>
                                 Upload Images

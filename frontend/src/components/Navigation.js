@@ -32,7 +32,7 @@ const Navigation = () => {
                 ? "none"
                 : "block";
         dispatch(resetNotifications());
-        if (unreadNotifications > 1)
+        if (unreadNotifications > 0)
             axios.post(`/users/${user._id}/updateNotifications`);
     };
 

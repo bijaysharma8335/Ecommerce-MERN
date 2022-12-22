@@ -96,7 +96,7 @@ const NewProduct = () => {
                             <Form.Control
                                 as="textarea"
                                 placeholder="Product Description"
-                                vaue={description}
+                                value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                                 style={{ height: "100px" }}
                                 required
@@ -107,7 +107,7 @@ const NewProduct = () => {
                             <Form.Control
                                 type="number"
                                 placeholder="Price($)"
-                                vaue={price}
+                                value={price}
                                 onChange={(e) => setPrice(e.target.value)}
                                 required
                             />

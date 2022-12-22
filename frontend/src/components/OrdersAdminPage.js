@@ -4,9 +4,11 @@ import { useSelector } from "react-redux";
 import { FaEye } from "react-icons/fa";
 import axios from "../apiApi";
 import Loading from "./Loading";
+import Pagination from "./Pagination";
 
 const OrdersAdminPage = () => {
-    const products = useSelector((state) => state.products);
+    const products = useSelector((state) => state.products.data);
+
     const [orders, setorders] = useState([]);
     const [loading, setLoading] = useState(false);
     const [show, setShow] = useState(false);
@@ -16,9 +18,9 @@ const OrdersAdminPage = () => {
         setLoading(true);
         axios
             .get("/orders")
-            .then((data) => {
+            .then((res) => {
                 setLoading(false);
-                setorders(data);
+                setorders(res.data);
             })
             .catch((e) => {
                 setLoading(false);
@@ -55,6 +57,40 @@ const OrdersAdminPage = () => {
     if (orders.length === 0) {
         return <h1 className="text-center pt-4">No orders yet</h1>;
     }
+
+    function TableRow({ _id, count, owner, total, status, products, address }) {
+        return (
+            <tr>
+                <td>{_id}</td>
+                <td>{owner?.name}</td>
+                <td>{count}</td>
+                <td>{total}</td>
+                <td>{address}</td>
+                <td>
+                    {status === "processing" ? (
+                        <Button
+                            size="sm"
+                            onClick={() => markShipped(_id, owner?._id)}
+                        >
+                            marked as Shipped
+                        </Button>
+                    ) : (
+                        <Badge bg="success">Shipped</Badge>
+                    )}
+                </td>
+
+                <td>
+                    <span
+                        style={{ cursor: "pointer" }}
+                        onClick={() => showOrder(products)}
+                    >
+                        View Order
+                        <FaEye />
+                    </span>
+                </td>
+            </tr>
+        );
+    }
     return (
         <>
             <Table responsive striped bordered hover>
@@ -69,50 +105,26 @@ const OrdersAdminPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {orders.length > 0 &&
-                        orders.map((order, i) => (
-                            <tr key={i}>
-                                <td>{order._id}</td>
-                                <td>{order.owner?.name}</td>
-                                <td>{order.count}</td>
-                                <td>${order.total}</td>
-                                <td>{order.address}</td>
-                                <td>
-                                    {order.status === "processing" ? (
-                                        <Button
-                                            size="sm"
-                                            onClick={() =>
-                                                markShipped(
-                                                    order._id,
-                                                    order.owner?._id
-                                                )
-                                            }
-                                        >
-                                            marked as Shipped
-                                        </Button>
-                                    ) : (
-                                        <Badge bg="success">Shipped</Badge>
-                                    )}
-                                </td>
-
-                                <td>
-                                    <span style={{ cursor: "pointer" }}>
-                                        View Order
-                                        <FaEye
-                                            onClick={() => showOrder(order.products)}
-                                        />
-                                    </span>
-                                </td>
-                            </tr>
-                        ))}
+                    <Pagination
+                        data={orders}
+                        RenderComponent={TableRow}
+                        pageLimit={1}
+                        dataLimit={10}
+                        tablePagination={true}
+                    />
                 </tbody>
             </Table>
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>Order Details</Modal.Header>
+                <Modal.Header closeButton>
+                    <Modal.Title>Order Details</Modal.Title>
+                </Modal.Header>
                 <Modal.Body>
                     {orderToShow.length > 0 &&
                         orderToShow.map((order, i) => (
-                            <div className="order_details-container d-flex justify-conten-around py-2" key={i}>
+                            <div
+                                className="order_details-container d-flex justify-conten-around py-2"
+                                key={i}
+                            >
                                 <img
                                     src={order.pictures[0].url}
                                     style={{
@@ -124,8 +136,7 @@ const OrdersAdminPage = () => {
                                 />
                                 <p>
                                     <span>
-                                        {order.count} x{" "}
-                                        <span>{order.name}</span>
+                                        {order.count} x<span>{order.name}</span>
                                     </span>
                                 </p>
                                 <p>

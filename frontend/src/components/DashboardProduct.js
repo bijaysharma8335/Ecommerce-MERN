@@ -4,8 +4,10 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useDeleteProductMutation } from "../services/appApi";
 import "./DashboardProduct.css";
+import Pagination from "./Pagination";
+
 const DashboardProduct = () => {
-    const products = useSelector((state) => state.products);
+    const products = useSelector((state) => state.products.data);
     const user = useSelector((state) => state.user);
     const [deleteProduct, { isLoading, isSuccess }] =
         useDeleteProductMutation();
@@ -14,6 +16,38 @@ const DashboardProduct = () => {
         if (window.confirm("Are you sure?"))
             deleteProduct({ product_id: id, user_id: user.id });
     };
+
+    function TableRow({ pictures, _id, name, price }) {
+        return (
+            <tr>
+                <td>
+                    <img
+                        src={pictures[0].url}
+                        className="dashboard-product-preview"
+                        alt=""
+                    />
+                </td>
+                <td>{_id}</td>
+                <td>{name}</td>
+                <td>{price}</td>
+                <td> <Link
+                        to={`/product/${_id}/edit`}
+                        className="btn btn-primary me-2"
+                    >
+                        Edit
+                    </Link>
+                    <Button
+                        onClick={() => handleDeleteProduct(_id, user._id)}
+                        disabled={isLoading}
+                        variant="danger"
+                    >
+                        Delete
+                    </Button>
+                   
+                </td>
+            </tr>
+        );
+    }
     return (
         <Table striped bordered hovered responsive>
             <thead>
@@ -25,41 +59,13 @@ const DashboardProduct = () => {
                 </tr>
             </thead>
             <tbody>
-                {products.length > 0 &&
-                    products.map((product) => (
-                        <tr>
-                            <td>
-                                <img
-                                    src={product.pictures[0].url}
-                                    alt=""
-                                    className="dashboard-product-preview"
-                                />
-                            </td>
-                            <td>{product._id}</td>
-                            <td>{product.name}</td>
-                            <td>{product.price}</td>
-                            <td>
-                                <Button
-                                    onClick={() =>
-                                        handleDeleteProduct(
-                                            product._id,
-                                            user._id
-                                        )
-                                    }
-                                    variant="danger"
-                                    disabled={isLoading}
-                                >
-                                    Delete
-                                </Button>
-                                <Link
-                                    to={`/products/${product._id}/edit`}
-                                    className="btn btn-warning"
-                                >
-                                    Edit
-                                </Link>
-                            </td>
-                        </tr>
-                    ))}
+                <Pagination
+                    data={products}
+                    RenderComponent={TableRow}
+                    pageLimit={1}
+                    dataLimit={6}
+                    tablePagination={true}
+                />
             </tbody>
         </Table>
     );

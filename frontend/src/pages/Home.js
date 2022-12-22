@@ -12,10 +12,12 @@ import ProductPreview from "../components/ProductPreview";
 const Home = () => {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.products);
-    const lastProducts = products.data;
-
+    const lastProducts = products;
+    console.log(products.length);
     useEffect(() => {
-        axios.get("/products").then((data) => dispatch(updateProducts(data)));
+        axios
+            .get("/products")
+            .then((res) => dispatch(updateProducts(res)));
     }, []);
 
     return (

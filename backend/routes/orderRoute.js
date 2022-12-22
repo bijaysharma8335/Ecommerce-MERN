@@ -64,7 +64,7 @@ router.patch("/:id/mark-shipped", async (req, res) => {
             time: new Date(),
         };
         io.sockets.emit("notification", notification, ownerId);
-        user.notification.push(notification);
+        user.notification.unshift(notification);
         await user.save();
         res.status(200).json(orders);
     } catch (error) {
