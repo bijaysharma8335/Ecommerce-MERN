@@ -73,15 +73,16 @@ const ProductPage = () => {
                         mouseTracking
                         items={images}
                         controlsStrategy="alternate"
+                        disableDotsControls
                     />
                 </Col>
-                <Col lg={6} className="pt-4">
+                <Col lg={6} className="pt-4 px-4">
                     <h1>{product.name}</h1>
                     <p>
                         <Badge bg="primary">{product.category}</Badge>
                     </p>
                     <p className="product_price">${product.price}</p>
-                    <p className="py-3" style={{ textAlign: "center" }}>
+                    <p className="py-1" style={{ textAlign: "center" }}>
                         {product.description}
                     </p>
 

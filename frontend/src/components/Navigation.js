@@ -18,12 +18,14 @@ const Navigation = () => {
     const handleLogout = () => {
         dispatch(logout());
     };
+
     const unreadNotifications = user?.notifications.reduce((acc, current) => {
         if (current.status === "unread") return acc + 1;
         return acc;
     }, 0);
 
-    const handleToggleNotifications = () => {
+    const handleToggleNotifications = (e) => {
+        e.preventDefault();
         const position = bellRef.current.getBoundingClientRect();
         setBellPos(position);
         notificationsRef.current.style.display =
@@ -36,15 +38,27 @@ const Navigation = () => {
     };
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="light" expand="lg" className="position-sticky" fixed="top">
             <Container>
                 <LinkContainer to="/">
                     <Navbar.Brand>Ecommerce</Navbar.Brand>
                 </LinkContainer>
 
+                <input type="search" placeholder="Search" />
+
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
+                        <LinkContainer to="/">
+                            <Nav.Link>Home</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="">
+                            <Nav.Link>About</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="">
+                            <Nav.Link>Contact</Nav.Link>
+                        </LinkContainer>
+
                         {/* {if no user} */}
                         {!user && (
                             <LinkContainer to="/login">
@@ -82,11 +96,16 @@ const Navigation = () => {
                                     />
                                 </Nav.Link>
                                 <NavDropdown
-                                    title={`${user.email}`}
+                                    title={`${user.name}`}
                                     id="basic-nav-dropdown"
                                 >
                                     {user.isAdmin && (
                                         <>
+                                            <LinkContainer to="">
+                                                <NavDropdown.Item>
+                                                    Profile
+                                                </NavDropdown.Item>
+                                            </LinkContainer>
                                             <LinkContainer to="/admin">
                                                 <NavDropdown.Item>
                                                     Dashboard
@@ -101,6 +120,11 @@ const Navigation = () => {
                                     )}
                                     {!user.isAdmin && (
                                         <>
+                                            <LinkContainer to="">
+                                                <NavDropdown.Item>
+                                                    Profile
+                                                </NavDropdown.Item>
+                                            </LinkContainer>
                                             <LinkContainer to="/cart">
                                                 <NavDropdown.Item>
                                                     Cart

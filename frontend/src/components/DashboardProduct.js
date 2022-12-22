@@ -58,14 +58,15 @@ const DashboardProduct = () => {
         );
     }
     return (
-        <Table  bordered hover responsive>
+        <Table bordered hover responsive>
             <thead>
                 <tr>
-                    <th></th>
+                    <th>Product</th>
                     <th>Product ID</th>
                     <th>Product Name</th>
                     <th>Product Category</th>
                     <th>Product Price</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
