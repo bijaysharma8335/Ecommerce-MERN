@@ -93,7 +93,7 @@ const OrdersAdminPage = () => {
     }
     return (
         <>
-            <Table responsive striped bordered hover>
+            <Table responsive  bordered hover>
                 <thead>
                     <tr>
                         <th>#</th>

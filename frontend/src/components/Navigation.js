@@ -25,7 +25,6 @@ const Navigation = () => {
 
     const handleToggleNotifications = () => {
         const position = bellRef.current.getBoundingClientRect();
-        console.log(position);
         setBellPos(position);
         notificationsRef.current.style.display =
             notificationsRef.current.style.display === "block"
@@ -74,11 +73,11 @@ const Navigation = () => {
                             <>
                                 <Nav.Link
                                     style={{ position: "relative" }}
+                                    ref={bellRef}
                                     onClick={handleToggleNotifications}
                                 >
                                     <FaBell
                                         className="fas fa-bell"
-                                        ref={bellRef}
                                         data-count={unreadNotifications || null}
                                     />
                                 </Nav.Link>
@@ -133,7 +132,7 @@ const Navigation = () => {
                 className="notifications_container"
                 ref={notificationsRef}
                 style={{
-                    top: bellPos.top + 30,
+                    top: Number(bellPos.top + 50),
                     left: bellPos.left,
                     display: "none",
                 }}

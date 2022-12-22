@@ -24,7 +24,7 @@ const ClientsAdminPage = () => {
         return <h1 className="py-2 text-center">No Users yet</h1>;
     }
     return (
-        <Table responsive striped bordered hover>
+        <Table responsive  bordered hover>
             <thead>
                 <tr>
                     <th>Client Id</th>

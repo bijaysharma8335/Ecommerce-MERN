@@ -58,7 +58,7 @@ const DashboardProduct = () => {
         );
     }
     return (
-        <Table striped bordered hovered responsive>
+        <Table  bordered hover responsive>
             <thead>
                 <tr>
                     <th></th>
