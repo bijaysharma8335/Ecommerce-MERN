@@ -1,0 +1,27 @@
+.testimonials {
+    background-image: url("https://images.unsplash.com/photo-1632636331569-416d0f38c483?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&w=1000&q=80");
+    height: 400px;
+    background-size: cover;
+    background-color: rgb(239, 242, 242);
+    min-height: 100px;
+    z-index: 1;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+.image-swipe {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.testimonial-content {
+    padding-top: 10px;
+    opacity: 1;
+    z-index: 999;
+    color: rgb(247, 240, 240);
+}
+.testimonial-content > p {
+    margin: 0 30px;
+    font-style: italic;
+}

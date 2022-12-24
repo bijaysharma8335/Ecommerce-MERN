@@ -44,12 +44,16 @@ const Navigation = () => {
                     <Navbar.Brand>Ecommerce</Navbar.Brand>
                 </LinkContainer>
 
-                <input type="search" placeholder="Search" />
+                <input
+                    type="search"
+                    placeholder="Search"
+                    className="search-input mx-auto"
+                />
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <LinkContainer to="/" >
+                        <LinkContainer to="/">
                             <Nav.Link>Home</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/about">

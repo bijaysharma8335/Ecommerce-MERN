@@ -154,7 +154,7 @@ const EditProductPage = () => {
                             <Button type="button" onClick={showWidget}>
                                 Upload Images
                             </Button>
-                            <div className="images_preview-container">
+                            <div className="images_preview-container my-3">
                                 {images.map((image, i) => (
                                     <div className="img_preview" key={i}>
                                         <img src={image.url} alt="" />
