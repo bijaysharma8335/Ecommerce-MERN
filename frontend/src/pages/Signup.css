@@ -22,10 +22,18 @@
     height: 100vh;
     justify-content: center;
 }
-
-@media screen and (max-width:756px){
-    
-    .signup_image-container,.login_image-container{
+.password-show {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.password_icon {
+    position: absolute;
+    margin-right: 10px;
+}
+@media screen and (max-width: 756px) {
+    .signup_image-container,
+    .login_image-container {
         display: none;
     }
 }

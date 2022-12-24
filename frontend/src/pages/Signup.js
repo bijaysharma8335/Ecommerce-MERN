@@ -3,12 +3,15 @@ import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignupMutation } from "../services/appApi";
 import "./Signup.css";
+import { AiFillEye } from 'react-icons/ai';
+import { AiFillEyeInvisible } from 'react-icons/ai';
 
 const Signup = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const [signup, { error, isLoading, isError }] = useSignupMutation();
 
     const handleSubmit = (e) => {
@@ -52,23 +55,43 @@ const Signup = () => {
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Enter Your password"
-                                required
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
+                            <div className="password-show">
+                                <div
+                                    className="password_icon"
+                                    onClick={() =>
+                                        setPasswordVisible(!passwordVisible)
+                                    }
+                                >
+                                    {passwordVisible ? (
+                                        <AiFillEye />
+                                    ) : (
+                                        <AiFillEyeInvisible />
+                                    )}
+                                </div>{" "}
+                                <Form.Control
+                                    type={passwordVisible ? "text" : "password"}
+                                    placeholder="Enter Your password"
+                                    value={password}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                    required
+                                />
+                            </div>
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Button type="submit" disabled={isLoading}>
                                 Signup
                             </Button>
                         </Form.Group>
-                        <p>
-                            Already have a account?
-                            <Link to="/login">Login</Link>
-                        </p>
+                        <h6>
+                            <span className="me-2">
+                                Already have a account?
+                            </span>
+                            <Link to="/login" className="text-decoration-none">
+                                Login
+                            </Link>
+                        </h6>
                     </Form>
                 </Col>
                 <Col md={6} className="signup_image-container"></Col>
