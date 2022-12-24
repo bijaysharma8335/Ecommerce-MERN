@@ -167,8 +167,11 @@ const Navigation = () => {
                 }}
             >
                 {user?.notifications.length > 0 ? (
-                    user?.notifications.map((notification) => (
-                        <p className={`notification-${notification.status}`}>
+                    user?.notifications.map((notification, i) => (
+                        <p
+                            className={`notification-${notification.status}`}
+                            key={i}
+                        >
                             {notification.message}
                             <br />
                             <span>

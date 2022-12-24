@@ -22,13 +22,13 @@
 }
 .notifications_container {
     position: absolute;
-
     max-height: 200px;
     overflow-y: scroll;
     border: 1px solid gray;
     background-color: white;
     width: 200px;
     z-index: 999;
+    padding: 6px;
 }
 .notifications-read {
     background-color: lightblue;

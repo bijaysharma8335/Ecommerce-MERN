@@ -21,7 +21,6 @@ const CartPage = () => {
     const products = useSelector((state) => state.products.data);
 
     const userCartObj = user.cart;
-
     let cart = products.filter((product) => userCartObj[product._id] !== null);
 
     const [increaseCart] = useIncreaseCartProductMutation();
@@ -30,6 +29,7 @@ const CartPage = () => {
 
     function handleDecrease(product) {
         const quantity = user.cart.count;
+
         if (quantity <= 0) return alert("Cannot proceed");
         decreaseCart(product);
     }

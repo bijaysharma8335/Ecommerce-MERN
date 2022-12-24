@@ -20,8 +20,8 @@ import Footer from "./components/Footer";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Faqs from "./pages/Faqs";
-import ProfilePage from "./pages/ProfilePage";
-import EditProfilePage from "./pages/EditProfilePage";
+import AdminProfilePage from "./pages/AdminProfilePage";
+import EditAdminProfilePage from "./pages/EditAdminProfilePage";
 
 const App = () => {
     const user = useSelector((state) => state.user);
@@ -71,6 +71,14 @@ const App = () => {
                                 path="/product/:id/edit"
                                 element={<EditProductPage />}
                             />
+                            <Route
+                                path="/profile"
+                                element={<AdminProfilePage />}
+                            />
+                            <Route
+                                path="/profile/edit"
+                                element={<EditAdminProfilePage />}
+                            />
                         </>
                     )}
                     <Route path="/product/:id" element={<ProductPage />} />
@@ -78,8 +86,7 @@ const App = () => {
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/faq" element={<Faqs />} />
-                    <Route path="/profile" element={<ProfilePage />} />
-                    <Route path="/profile/edit" element={<EditProfilePage />} />
+
                     <Route
                         path="/category/:category"
                         element={<CategoryPage />}

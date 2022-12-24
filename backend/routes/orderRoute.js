@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const Order = require("../models/Order");
-const user = require("../models/User");
+const User = require("../models/User");
 const Schema = require("mongoose");
 
 //creating orders
@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
             count: 0,
         };
         user.orders.push(order);
-        io.socket.emit("orderCreated");
+       
         const notification = {
             status: "unread",
             message: `Ne worder from ${user.name}`,
@@ -53,7 +53,7 @@ router.get("/", async (req, res) => {
 router.patch("/:id/mark-shipped", async (req, res) => {
     const io = req.app.get("socketio");
     const { ownerId } = req.body;
-    const id = req.params;
+    const {id} = req.params;
     try {
         const user = await User.findById(ownerId);
         await Order.findByIdAndUpdate(id, { status: "shipped" });
@@ -64,7 +64,7 @@ router.patch("/:id/mark-shipped", async (req, res) => {
             time: new Date(),
         };
         io.sockets.emit("notification", notification, ownerId);
-        user.notification.unshift(notification);
+        user.notifications.unshift(notification);
         await user.save();
         res.status(200).json(orders);
     } catch (error) {

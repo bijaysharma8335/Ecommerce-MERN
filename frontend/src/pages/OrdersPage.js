@@ -63,7 +63,7 @@ const OrdersPage = () => {
                                 </Badge>
                             </td>
 
-                            <td>${order.date}</td>
+                            <td>{order.date}</td>
                             <td>${order.total}</td>
                         </tr>
                     ))}

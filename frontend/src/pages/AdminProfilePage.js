@@ -1,16 +1,24 @@
 import React from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./ProfilePage.css";
-const EditProfilePage = () => {
+import { useNavigate } from "react-router-dom";
+import "./AdminProfilePage.css";
+
+const AdminProfilePage = () => {
     const user = useSelector((state) => state.user);
+    const navigate = useNavigate();
     return (
         <Container style={{ width: "70%" }}>
             <h1 className="text-center my-3">Profile </h1>
-
             <div className="profile-header bg-light my-3 p-4">
                 <h5>User:{user.name}</h5>
-                <Button>Save</Button>
+
+                <Button
+                    variant="outline-primary"
+                    onClick={() => navigate("/profile/edit")}
+                >
+                    Edit
+                </Button>
             </div>
             <div className="bg-light p-3 my-1">
                 <div className="profile-header">
@@ -36,7 +44,7 @@ const EditProfilePage = () => {
                                 <Form.Control
                                     className="text"
                                     value={user.name}
-                                 
+                                    disabled
                                 />
                             </Col>
                         </Row>
@@ -50,7 +58,7 @@ const EditProfilePage = () => {
                                 <Form.Control
                                     className="email"
                                     value={user.email}
-                                  
+                                    disabled
                                 />
                             </Col>
                         </Row>
@@ -66,7 +74,7 @@ const EditProfilePage = () => {
                                     className="password"
                                     placeholder="********"
                                     value={user.password}
-                                    
+                                    disabled
                                 />
                             </Col>{" "}
                         </Row>
@@ -80,7 +88,7 @@ const EditProfilePage = () => {
                                 <Form.Control
                                     className="text"
                                     value={user.name}
-                                   
+                                    disabled
                                 />
                             </Col>
                         </Row>
@@ -94,7 +102,7 @@ const EditProfilePage = () => {
                                 <Form.Control
                                     className="text"
                                     value={user.name}
-                                    
+                                    disabled
                                 />
                             </Col>
                         </Row>
@@ -105,4 +113,4 @@ const EditProfilePage = () => {
     );
 };
 
-export default EditProfilePage;
+export default AdminProfilePage;

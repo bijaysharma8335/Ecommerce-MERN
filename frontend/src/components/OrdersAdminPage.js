@@ -85,7 +85,7 @@ const OrdersAdminPage = () => {
                         onClick={() => showOrder(products)}
                     >
                         View Order
-                        <FaEye />
+                        <FaEye  className="mx-2"/>
                     </span>
                 </td>
             </tr>
@@ -93,7 +93,7 @@ const OrdersAdminPage = () => {
     }
     return (
         <>
-            <Table responsive  bordered hover>
+            <Table responsive bordered hover>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -122,7 +122,7 @@ const OrdersAdminPage = () => {
                     {orderToShow.length > 0 &&
                         orderToShow.map((order, i) => (
                             <div
-                                className="order_details-container d-flex justify-conten-around py-2"
+                                className="order_details-container d-flex justify-content-space-between py-2"
                                 key={i}
                             >
                                 <img
@@ -133,15 +133,19 @@ const OrdersAdminPage = () => {
                                         objectFit: "cover",
                                     }}
                                     alt=""
+                                    className="me-3"
                                 />
-                                <p>
-                                    <span>
-                                        {order.count} x<span>{order.name}</span>
+                                <h4>
+                                    <span className="ms-2">
+                                        {order.count} x
+                                        <span className="mx-2">
+                                            {order.name}
+                                        </span>
                                     </span>
-                                </p>
-                                <p>
+                                </h4>
+                                <h4>
                                     Price: ${Number(order.price) * order.count}
-                                </p>
+                                </h4>
                             </div>
                         ))}
                 </Modal.Body>
