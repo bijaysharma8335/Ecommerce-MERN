@@ -77,12 +77,12 @@ const ProductPage = () => {
                     />
                 </Col>
                 <Col lg={6} className="pt-4 px-4">
-                    <h1>{product.name}</h1>
-                    <p>
+                    <h1 className="text-center">{product.name}</h1>
+                    <p  className="text-center">
                         <Badge bg="primary">{product.category}</Badge>
                     </p>
-                    <p className="product_price">${product.price}</p>
-                    <p className="py-1" style={{ textAlign: "center" }}>
+                    <p className="product_price text-center">${product.price}</p>
+                    <p className="py-1" style={{  }}>
                         {product.description}
                     </p>
 
@@ -133,7 +133,7 @@ const ProductPage = () => {
                 </Col>
             </Row>
             <div className="my-4">
-                <h2>Similar products</h2>
+                <h2 className="text-center">Similar products</h2>
                 <div className="d-flex justify-content-center align-items-center flex-wrap">
                     <AliceCarousel
                         mouseTracking

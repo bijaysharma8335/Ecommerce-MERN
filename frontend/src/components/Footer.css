@@ -1,6 +1,6 @@
 .footer_container {
     padding-top: 2rem;
-    padding:0 7rem;
+    padding: 0 7rem;
     font-size: 0.9rem;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -116,4 +116,18 @@
 .uil-linkedin-alt:hover {
     background-color: white;
     color: #0a66c2;
+}
+
+@media screen and (max-width: 1024px) {
+    .footer_container {
+        grid-template-columns: 1fr 1fr;
+       
+    }
+}
+@media screen and (max-width: 600px) {
+    .footer_container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
 }
