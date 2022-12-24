@@ -73,7 +73,7 @@ const NewProduct = () => {
             <Row>
                 <Col md={6} className="newproduct_form-container">
                     <Form style={{ width: "100%" }} onSubmit={handleSubmit}>
-                        <h1 className="text-success mt-4">Create a product </h1>
+                        <h1 className="text-center mt-4">Create a product </h1>
                         <Form.Group className="mb-3">
                             {isSuccess && (
                                 <Alert variant="success">
@@ -122,7 +122,9 @@ const NewProduct = () => {
                                 <option disabled value="">
                                     ---------Select one--------
                                 </option>
-                                <option value="technology">Technology</option>
+                                <option value="camera">Camera</option>
+                                <option value="headphones">HeadPhones</option>
+                                <option value="tv">Tv</option>
                                 <option value="tablets">Tablets</option>
                                 <option value="laptops">Laptops</option>
                                 <option value="phones">Phones</option>
@@ -133,7 +135,7 @@ const NewProduct = () => {
                             <Button type="button" onClick={showWidget}>
                                 Upload Images
                             </Button>
-                            <div className="images_preview-container">
+                            <div className="images_preview-container my-3">
                                 {images.map((image, i) => (
                                     <div className="img_preview" key={i}>
                                         <img src={image.url} alt="" />

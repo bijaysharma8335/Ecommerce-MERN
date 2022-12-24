@@ -98,9 +98,9 @@ router.get("/category/:category", async (req, res) => {
     try {
         let products;
         if (category == "all") {
-            products = await Product.find().sort({ date: -1 });
+            products = await Product.find().sort({ _id: -1 });
         } else {
-            products = await Product.find({ category });
+            products = await Product.find({ category }).sort({ _id: -1 });
         }
         res.status(200).json(products);
     } catch (e) {
@@ -172,6 +172,7 @@ router.post("/decrease-cart", async (req, res) => {
 router.post("/remove-from-cart", async (req, res) => {
     const { userId, productId, price } = req.body;
     try {
+        console.log(req.body);
         const user = await User.findById(userId);
         const userCart = user.cart;
         userCart.total -= Number(userCart[productId]) * Number(price);

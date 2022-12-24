@@ -70,7 +70,7 @@ const CartPage = () => {
                                                 {!isLoading && (
                                                     <FaTimes
                                                         style={{
-                                                            marginRight: "10",
+                                                            marginRight: 10,
 
                                                             cursor: "pointer",
                                                         }}

@@ -4,7 +4,7 @@ import "./About.css";
 const About = () => {
     return (
         <Container>
-            <h1 className="text-center">About Us</h1>
+            <h1 className="text-center my-3">About Us</h1>
             <div className="about-container">
                 <div className="about-content">
                     <p>

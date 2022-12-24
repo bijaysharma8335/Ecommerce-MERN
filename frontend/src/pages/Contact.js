@@ -58,22 +58,22 @@ const Contact = () => {
                     </p>
                     <Form>
                         <Form.Group className="mb-3">
-                            <Form.Label>Name(required)*</Form.Label>
+                            <Form.Label>Name *</Form.Label>
                             <Form.Control type="text" placeholder="Enter Your Name" required />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Email(required)*</Form.Label>
+                            <Form.Label>Email *</Form.Label>
                             <Form.Control type="text" placeholder="Enter Your Email" required />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Phone Number(required)*</Form.Label>
+                            <Form.Label>Phone Number *</Form.Label>
                             <Form.Control
                                 type="number"
                                 placeholder="Enter Your Phone Number"
                                 required
                             />
                         </Form.Group>
-                        <Form.Group>
+                        <Form.Group className="mb-3">
                             <Form.Label>Your Message</Form.Label>
                             <Form.Control as="textarea" placeholder="Enter Your Message" required />
                         </Form.Group>

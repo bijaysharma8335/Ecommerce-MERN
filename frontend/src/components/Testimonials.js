@@ -15,12 +15,10 @@ const Testimonials = () => {
             <h1 className="text-center my-3">Testimonials</h1>
             <div>
                 <Swiper
-                    modules={[ Pagination]}
+                    modules={[Pagination]}
                     loop={true}
                     spaceBetween={50}
                     slidesPerView={1}
-                    onSlideChange={() => console.log("slide change")}
-                    onSwiper={(swiper) => console.log(swiper)}
                     pagination={{ clickable: true }}
                     className="testimonials"
                 >

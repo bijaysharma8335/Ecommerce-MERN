@@ -88,7 +88,7 @@ const CheckoutForm = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col md={7} className="mb-3">
+                    <Col md={6} className="mb-3">
                         <Form.Group>
                             <Form.Label>Address</Form.Label>
                             <Form.Control
@@ -100,7 +100,7 @@ const CheckoutForm = () => {
                             />
                         </Form.Group>
                     </Col>
-                    <Col md={5} className="mb-3">
+                    <Col md={6} className="mb-3">
                         <Form.Group>
                             <Form.Label>Country</Form.Label>
                             <Form.Control

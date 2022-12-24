@@ -144,7 +144,9 @@ const EditProductPage = () => {
                                 <option disabled value="">
                                     ---------Select one--------
                                 </option>
-                                <option value="technology">Technology</option>
+                                <option value="camera">Camera</option>
+                                <option value="headphones">HeadPhones</option>
+                                <option value="tv">Tv</option>
                                 <option value="tablets">Tablets</option>
                                 <option value="laptops">Laptops</option>
                                 <option value="phones">Phones</option>

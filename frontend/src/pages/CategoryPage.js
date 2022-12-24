@@ -33,7 +33,7 @@ const CategoryPage = () => {
         product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     return (
-        <div className="category_page-container">
+        <div className=" category_page-container">
             <div
                 className={`pt-3 ${category}-banner-container category-banner-container`}
             >
@@ -51,12 +51,12 @@ const CategoryPage = () => {
             {productsSearch.length === 0 ? (
                 <h1> No products to show</h1>
             ) : (
-                <Container>
+                <Container >
                     <Row>
                         <Col md={{ span: 10, offset: 1 }}>
                             <div
                                 className="
-                          d-flex justify-content-center align-items-center flex-wrap"
+                          d-flex justify-content-center align-items-center flex-wrap mx-1"
                             >
                                 {productsSearch.map((product, i) => (
                                     <ProductPreview {...product} key={i} />
