@@ -68,6 +68,6 @@
     ) !important;
 }
 .search-input:hover {
-    border: 1px solid rgb(199, 200, 204);
+    border: 2px solid rgb(18, 58, 215);
     background-color: white !important;
 }

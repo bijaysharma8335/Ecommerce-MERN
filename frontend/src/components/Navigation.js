@@ -105,7 +105,7 @@ const Navigation = () => {
                                 >
                                     {user.isAdmin && (
                                         <>
-                                            <LinkContainer to="">
+                                            <LinkContainer to="/profile">
                                                 <NavDropdown.Item>
                                                     Profile
                                                 </NavDropdown.Item>

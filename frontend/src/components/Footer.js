@@ -26,13 +26,13 @@ const Footer = () => {
                     <h4 className="text-black "> Privacy</h4>
                     <ul>
                         <li>
-                            <Link className="link">Privacy Policy</Link>
+                            <Link className="link" to='/'>Privacy Policy</Link>
                         </li>
                         <li>
-                            <Link className="link">Terms & Conditions</Link>
+                            <Link className="link" to='/'>Terms & Conditions</Link>
                         </li>
                         <li>
-                            <Link className="link">Refund Policy</Link>
+                            <Link className="link" to='/'>Refund Policy</Link>
                         </li>
                     </ul>
                 </div>
