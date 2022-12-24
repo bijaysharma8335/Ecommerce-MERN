@@ -15,6 +15,7 @@ code {
         monospace;
 }
 .form-control,
-.form-select {
+.form-select,
+.accordion-button {
     box-shadow: unset !important;
 }

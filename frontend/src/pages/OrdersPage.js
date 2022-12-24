@@ -39,8 +39,8 @@ const OrdersPage = () => {
             <h1 className="text-center">Your Orders</h1>
             <Table responsive striped bordered hover>
                 <thead>
-                    <tr>
-                        <th>#</th>
+                    <tr><th>SN.</th>
+                        <th>ID</th>
                         <th>Status</th>
                         <th>Date</th>
                         <th>Total</th>
@@ -49,6 +49,7 @@ const OrdersPage = () => {
                 <tbody>
                     {orders.map((order, i) => (
                         <tr key={i}>
+                            <td>{i+1}</td>
                             <td>{order._id}</td>
                             <td>
                                 <Badge

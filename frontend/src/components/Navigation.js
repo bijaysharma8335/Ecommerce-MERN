@@ -124,11 +124,7 @@ const Navigation = () => {
                                     )}
                                     {!user.isAdmin && (
                                         <>
-                                            <LinkContainer to="">
-                                                <NavDropdown.Item>
-                                                    Profile
-                                                </NavDropdown.Item>
-                                            </LinkContainer>
+                                           
                                             <LinkContainer to="/cart">
                                                 <NavDropdown.Item>
                                                     Cart
