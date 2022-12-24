@@ -49,13 +49,13 @@ const Navigation = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <LinkContainer to="/">
+                        <LinkContainer to="/" >
                             <Nav.Link>Home</Nav.Link>
                         </LinkContainer>
-                        <LinkContainer to="">
+                        <LinkContainer to="/about">
                             <Nav.Link>About</Nav.Link>
                         </LinkContainer>
-                        <LinkContainer to="">
+                        <LinkContainer to="/contact">
                             <Nav.Link>Contact</Nav.Link>
                         </LinkContainer>
 
@@ -142,6 +142,7 @@ const Navigation = () => {
                                         variant="danger"
                                         onClick={handleLogout}
                                         className="logout-btn"
+                                        size="sm"
                                     >
                                         Logout
                                     </Button>

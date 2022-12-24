@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
 import "./App.css";
-
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -17,6 +16,10 @@ import OrdersPage from "./pages/OrdersPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import EditProductPage from "./pages/EditProduct";
 import { addNotification } from "./features/userSlice";
+import Footer from "./components/Footer";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
+import Faqs from './pages/Faqs';
 
 const App = () => {
     const user = useSelector((state) => state.user);
@@ -66,6 +69,9 @@ const App = () => {
                     )}
                     <Route path="/product/:id" element={<ProductPage />} />
                     <Route path="/new-product" element={<NewProduct />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/faq" element={<Faqs />} />
                     <Route
                         path="/category/:category"
                         element={<CategoryPage />}
@@ -73,6 +79,7 @@ const App = () => {
 
                     <Route path="/" element={<Home />} />
                 </Routes>
+                <Footer />
             </BrowserRouter>
         </div>
     );

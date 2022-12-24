@@ -2,15 +2,17 @@ import React, { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-import { useDispatch, useSelector } from "react-redux";
-import categories from "../Categories";
+
+import categories from "../constants/categories";
 import "./Home.css";
 import axios from "../apiApi.js";
 
 import { updateProducts } from "../features/productSlice";
 import ProductPreview from "../components/ProductPreview";
+import Subscribe from "./Subscribe";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -21,7 +23,6 @@ const Home = () => {
         568: { items: 2 },
         1024: { items: 3 },
     };
-
 
     useEffect(() => {
         axios.get("/products").then((res) => dispatch(updateProducts(res)));
@@ -65,7 +66,6 @@ const Home = () => {
         </div>,
     ];
 
-
     return (
         <div>
             <AliceCarousel
@@ -86,7 +86,7 @@ const Home = () => {
             />
 
             <div className="featured-products-container container mt-4">
-                <h3>Recent Products</h3>
+                <h3 className="text-center">Recent Products</h3>
                 {/* last products here */}
                 <div className="d-flex justify-content-center flex-wrap">
                     {lastProducts?.length > 0 &&
@@ -116,7 +116,7 @@ const Home = () => {
                 />
             </div>
             <div className="recent_products-container mt-4">
-                <h2>Categories</h2>
+                <h2 className="text-center">Categories</h2>
                 <Row>
                     {categories.map((category, i) => (
                         <LinkContainer
@@ -139,6 +139,7 @@ const Home = () => {
                     ))}
                 </Row>
             </div>
+            <Subscribe />
         </div>
     );
 };
