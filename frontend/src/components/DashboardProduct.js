@@ -1,12 +1,13 @@
 import React from "react";
 import { Button, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDeleteProductMutation } from "../services/appApi";
 import "./DashboardProduct.css";
 import Pagination from "./Pagination";
 
 const DashboardProduct = () => {
+    const navigate=useNavigate()
     const products = useSelector((state) => state.products.data);
     const user = useSelector((state) => state.user);
     const [deleteProduct, { isLoading, isSuccess }] =
@@ -14,7 +15,8 @@ const DashboardProduct = () => {
     //function for removing the prduct
     const handleDeleteProduct = (id) => {
         if (window.confirm("Are you sure?"))
-            deleteProduct({ product_id: id, user_id: user.id });
+            deleteProduct({ product_id: id, user_id: user._id });
+            navigate('/')
     };
 
     function TableRow({ pictures, _id, name, price, category }) {

@@ -9,7 +9,7 @@ const Pagination = ({
     tablePagination,
 }) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [pages] = useState(Math.floor(data.length / dataLimit) + 1);
+    const [pages] = useState(Math.floor(data?.length / dataLimit) + 1);
 
     const getPaginatedData = () => {
         const startIndex = currentPage * dataLimit - dataLimit;
