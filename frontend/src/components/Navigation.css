@@ -71,3 +71,16 @@
     border: 2px solid rgb(18, 58, 215);
     background-color: white !important;
 }
+
+@media screen and (max-width: 992px) {
+    .notifications_container {
+        top: 0px;
+        left: 70px;
+    }
+}
+@media screen and (min-width: 992px) {
+    .notifications_container {
+        top: 36px;
+        right: -215%;
+    }
+}

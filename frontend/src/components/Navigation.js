@@ -7,14 +7,13 @@ import { logout, resetNotifications } from "../features/userSlice";
 import axios from "../apiApi";
 import "./Navigation.css";
 
-const Navigation = () => {
+const Navigation = ({ notificationBar, toggleNotifications }) => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user);
 
     const bellRef = useRef(null);
     const notificationsRef = useRef(null);
     const [bellPos, setBellPos] = useState({});
-
     const handleLogout = () => {
         dispatch(logout());
     };
@@ -28,6 +27,7 @@ const Navigation = () => {
         e.preventDefault();
         const position = bellRef.current.getBoundingClientRect();
         setBellPos(position);
+
         notificationsRef.current.style.display =
             notificationsRef.current.style.display === "block"
                 ? "none"
@@ -96,8 +96,46 @@ const Navigation = () => {
                                 >
                                     <FaBell
                                         className="fas fa-bell"
+                                        ref={bellRef}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggleNotifications();
+                                        }}
                                         data-count={unreadNotifications || null}
                                     />
+                                    {notificationBar && (
+                                        <div
+                                            className="notifications_container"
+                                            ref={notificationsRef}
+                                        >
+                                            {user?.notifications.length > 0 ? (
+                                                user?.notifications.map(
+                                                    (notification, i) => (
+                                                        <p
+                                                            className={`notification-${notification.status}`}
+                                                            key={i}
+                                                        >
+                                                            {
+                                                                notification.message
+                                                            }
+                                                            <br />
+                                                            <span>
+                                                                {notification.time.split(
+                                                                    "T"
+                                                                )[0] +
+                                                                    " " +
+                                                                    notification.time.split(
+                                                                        "T"
+                                                                    )[1]}
+                                                            </span>
+                                                        </p>
+                                                    )
+                                                )
+                                            ) : (
+                                                <p>No notifications</p>
+                                            )}
+                                        </div>
+                                    )}
                                 </Nav.Link>
                                 <NavDropdown
                                     title={`${user.name}`}
@@ -124,7 +162,6 @@ const Navigation = () => {
                                     )}
                                     {!user.isAdmin && (
                                         <>
-                                           
                                             <LinkContainer to="/cart">
                                                 <NavDropdown.Item>
                                                     Cart
@@ -153,34 +190,6 @@ const Navigation = () => {
                 </Navbar.Collapse>
             </Container>
             {/* notifications */}
-            <div
-                className="notifications_container"
-                ref={notificationsRef}
-                style={{
-                    top: Number(bellPos.top + 50),
-                    left: bellPos.left,
-                    display: "none",
-                }}
-            >
-                {user?.notifications.length > 0 ? (
-                    user?.notifications.map((notification, i) => (
-                        <p
-                            className={`notification-${notification.status}`}
-                            key={i}
-                        >
-                            {notification.message}
-                            <br />
-                            <span>
-                                {notification.time.split("T")[0] +
-                                    " " +
-                                    notification.time.split("T")[1]}
-                            </span>
-                        </p>
-                    ))
-                ) : (
-                    <p>No notifications</p>
-                )}
-            </div>
         </Navbar>
     );
 };

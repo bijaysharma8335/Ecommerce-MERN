@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
@@ -26,6 +26,7 @@ import EditAdminProfilePage from "./pages/EditAdminProfilePage";
 const App = () => {
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
+    const [notificationBar, setnotificationBar] = useState(false);
     useEffect(() => {
         const socket = io("ws://localhost:8000");
         socket.off("notification").on("notification", (msgObj, user_id) => {
@@ -40,11 +41,17 @@ const App = () => {
         });
     }, []);
 
+    const toggleNotifications = () => {
+        setnotificationBar(!notificationBar);
+    };
     return (
-        <div className="App">
+        <div className="App" onClick={() => setnotificationBar(false)}>
             <BrowserRouter>
                 <ScrollToTop />
-                <Navigation />
+                <Navigation
+                    notificationBar={notificationBar}
+                    toggleNotifications={toggleNotifications}
+                />
                 <Routes>
                     <Route index element={<Home />} />
                     {!user && (
