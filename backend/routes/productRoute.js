@@ -111,7 +111,9 @@ router.get("/category/:category", async (req, res) => {
 //cart routes
 router.post("/add-to-cart", async (req, res) => {
     const { userId, productId, price } = req.body;
+  
     try {
+        
         const user = await User.findById(userId);
 
         const userCart = user.cart;
@@ -122,7 +124,7 @@ router.post("/add-to-cart", async (req, res) => {
         }
         userCart.count += 1;
         userCart.total = Number(userCart.total) + Number(price);
-
+console.log(typeof(userCart.total));
         user.cart = userCart;
         user.markModified("cart");
         await user.save();
@@ -146,7 +148,7 @@ router.post("/increase-cart", async (req, res) => {
         await user.save();
         res.status(200).json(user);
     } catch (error) {
-        res.status(400).json(error.message);
+        res.status(400).send(error.message);
     }
 });
 
@@ -164,26 +166,28 @@ router.post("/decrease-cart", async (req, res) => {
         await user.save();
         res.status(200).json(user);
     } catch (error) {
-        res.status(400).json(error.message);
+        res.status(400).send(error.message);
     }
 });
 
 //remove product from cart
 router.post("/remove-from-cart", async (req, res) => {
     const { userId, productId, price } = req.body;
+    // console.log(req.body)
     try {
         const user = await User.findById(userId);
         const userCart = user.cart;
+        console.log(userCart)
         userCart.total -= Number(userCart[productId]) * Number(price);
         userCart.count -= userCart[productId];
         delete userCart[productId];
         user.cart = userCart;
         user.markModified("cart");
         await user.save();
-
+        // console.log(user);
         res.status(200).json(user);
     } catch (error) {
-        res.status(400).json(error.message);
+        res.status(400).send(error.message);
     }
 });
 module.exports = router;

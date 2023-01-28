@@ -13,7 +13,7 @@ import axios from "../apiApi.js";
 import { updateProducts } from "../features/productSlice";
 import ProductPreview from "../components/ProductPreview";
 import Subscribe from "./Subscribe";
-import Testimonials from './../components/Testimonials';
+import Testimonials from "./../components/Testimonials";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -140,7 +140,7 @@ const Home = () => {
                     ))}
                 </Row>
             </div>
-            <Testimonials/>
+            <Testimonials />
             <Subscribe />
         </div>
     );
