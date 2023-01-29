@@ -78,11 +78,13 @@ const ProductPage = () => {
                 </Col>
                 <Col lg={6} className="pt-4 px-4">
                     <h1 className="text-center">{product.name}</h1>
-                    <p  className="text-center">
+                    <p className="text-center">
                         <Badge bg="primary">{product.category}</Badge>
                     </p>
-                    <p className="product_price text-center">${product.price}</p>
-                    <p className="py-1" style={{  }}>
+                    <p className="product_price text-center">
+                        ${product.price}
+                    </p>
+                    <p className="py-1" style={{}}>
                         {product.description}
                     </p>
 
@@ -101,14 +103,15 @@ const ProductPage = () => {
                             <Button
                                 size="lg"
                                 disabled={!user}
-                                onClick={() =>
+                                onClick={() => {
+                                    console.log("productId", id);
                                     addToCart({
                                         userId: user._id,
                                         productId: id,
                                         price: product.price,
                                         image: product.pictures[0].url,
-                                    })
-                                }
+                                    });
+                                }}
                             >
                                 Add to Cart
                             </Button>

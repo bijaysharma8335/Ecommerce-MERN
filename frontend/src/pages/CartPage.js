@@ -18,7 +18,7 @@ const stripePromise = loadStripe(
 );
 const CartPage = () => {
     const user = useSelector((state) => state.user);
-    console.log(user._id);
+    // console.log(user._id);
     const products = useSelector((state) => state.products.data);
 
     const userCartObj = user.cart;
@@ -26,7 +26,7 @@ const CartPage = () => {
         (product) => userCartObj[product._id] !== null
     );
 
-    console.log(cart);
+    // console.log(cart);
     const [increaseCart] = useIncreaseCartProductMutation();
     const [decreaseCart] = useDecreaseCartProductMutation();
     const [removeFromCart, { isLoading }] = useRemoveFromCartMutation();

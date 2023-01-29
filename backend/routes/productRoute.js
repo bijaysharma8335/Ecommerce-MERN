@@ -111,28 +111,52 @@ router.get("/category/:category", async (req, res) => {
 //cart routes
 router.post("/add-to-cart", async (req, res) => {
     const { userId, productId, price } = req.body;
-  
+    // console.log("userId, productId, price", userId, productId, price);
+    // console.log("productId", productId);
+
     try {
-        
         const user = await User.findById(userId);
+        // console.log("user", user);
 
         const userCart = user.cart;
         if (user.cart[productId]) {
+            console.log("I am here");
             userCart[productId] += 1;
         } else {
             userCart[productId] = 1;
         }
         userCart.count += 1;
-        userCart.total = Number(userCart.total) + Number(price);
-console.log(typeof(userCart.total));
+        userCart.total = userCart.total + parseInt(price);
+        // console.log(typeof userCart.total);
         user.cart = userCart;
         user.markModified("cart");
         await user.save();
+        user.cart = userCart;
+        console.log(" userCart.total", userCart.total);
         res.status(200).json(user);
     } catch (error) {
         res.status(400).json(error.message);
     }
 });
+// router.post("/add-to-cart", async (req, res) => {
+//     const { userId, productId, price } = req.body;
+//     console.log("typeof", typeof price);
+//     try {
+//         const user = await User.findById(userId);
+//         const userCart = user.cart;
+//         userCart.count += 1;
+//         userCart.total += userCart.total + parseInt(price);
+//         console.log(
+//             "Number(userCart.total) Number(price)",
+//             userCart.total,
+//             price
+//         );
+//         user.cart = userCart;
+//         user.markModified("cart");
+//         // user.markModified("cart");
+//         await user.save();
+//     } catch (error) {}
+// });
 
 //increase cart product
 router.post("/increase-cart", async (req, res) => {
@@ -177,7 +201,7 @@ router.post("/remove-from-cart", async (req, res) => {
     try {
         const user = await User.findById(userId);
         const userCart = user.cart;
-        console.log(userCart)
+        // console.log(userCart);
         userCart.total -= Number(userCart[productId]) * Number(price);
         userCart.count -= userCart[productId];
         delete userCart[productId];

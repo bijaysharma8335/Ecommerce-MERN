@@ -75,7 +75,7 @@ const Navigation = ({ notificationBar, toggleNotifications }) => {
                                     <FaShoppingCart
                                         style={{ fontSize: "20px" }}
                                     />
-                                    {user?.cart.count > 0 && (
+                                    {user?.cart?.count > 0 && (
                                         <span
                                             className="badge badge-warning"
                                             id="cartcount"
