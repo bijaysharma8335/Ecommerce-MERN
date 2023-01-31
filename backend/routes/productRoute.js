@@ -131,8 +131,8 @@ router.post("/add-to-cart", async (req, res) => {
         user.cart = userCart;
         user.markModified("cart");
         await user.save();
-        user.cart = userCart;
-        console.log(" userCart.total", userCart.total);
+        // user.cart = userCart;
+        // console.log(" userCart.total", userCart.total);
         res.status(200).json(user);
     } catch (error) {
         res.status(400).json(error.message);
