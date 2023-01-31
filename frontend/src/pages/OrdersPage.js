@@ -36,7 +36,7 @@ const OrdersPage = () => {
     }
     return (
         <Container>
-            <h1 className="text-center">Your Orders</h1>
+            <h1 className="text-center">My Orders</h1>
             <Table responsive striped bordered hover>
                 <thead>
                     <tr><th>SN.</th>

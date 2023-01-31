@@ -18,19 +18,13 @@ const stripePromise = loadStripe(
 );
 const CartPage = () => {
     const user = useSelector((state) => state.user);
-    // console
-    // console.log(user._id);
     const products = useSelector((state) => state.products.data);
 
     console.log("Products", products);
 
     const userCartObj = user.cart;
-    // const cart = products.filter(
-    //     (product) => userCartObj[product._id] !== null
-    // );
     const cart = products.filter((product) => !!userCartObj[product._id]);
 
-    // console.log(cart);
     const [increaseCart] = useIncreaseCartProductMutation();
     const [decreaseCart] = useDecreaseCartProductMutation();
     const [removeFromCart, { isLoading }] = useRemoveFromCartMutation();
@@ -42,7 +36,6 @@ const CartPage = () => {
         decreaseCart(product);
     }
 
-    const removeCartProduct = () => {};
     return (
         <Container style={{ minHeight: "95vh" }}>
             <Row>
